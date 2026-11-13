@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hind_Siliguri, Inter } from "next/font/google";
+import { MotionProvider } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
@@ -27,11 +28,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="bn" className={`${inter.variable} ${bangla.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
-        <SiteHeader />
-        <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 py-8">{children}</main>
-        <footer className="border-t border-line py-6 text-center text-sm text-muted">
-          জব গুরু · প্রস্তুতি চলুক নিয়মিত
-        </footer>
+        <MotionProvider>
+          <SiteHeader />
+          <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 py-8">{children}</main>
+          <footer className="border-t border-line py-6 text-center text-sm text-muted">
+            জব গুরু · প্রস্তুতি চলুক নিয়মিত
+          </footer>
+        </MotionProvider>
       </body>
     </html>
   );

@@ -1,10 +1,13 @@
 "use client";
 
+import { ArrowRight, Check, CircleCheck, CircleX, Keyboard, Repeat, RotateCcw, X } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { num, t } from "@/lib/i18n";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/client";
 import type { Lang, Question } from "@/lib/types";
+import { PressButton, Stagger, StaggerItem } from "./motion";
 
 const OPTION_LABELS: Record<Lang, string[]> = {
   bn: ["ক", "খ", "গ", "ঘ", "ঙ", "চ"],
@@ -55,7 +58,7 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
     setAnswers([]);
   }
 
-  // Keyboard: 1–6 (or ১–৬) picks an option, Enter / → moves on.
+  // Keyboard: 1–6 (or ১–৬) picks an option, Enter or the right arrow key moves on.
   useEffect(() => {
     if (done) return;
     function onKey(e: KeyboardEvent) {
@@ -80,53 +83,71 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
     const pct = answers.length ? Math.round((score / answers.length) * 100) : 0;
     return (
       <div className="space-y-6">
-        <div className="rounded-xl border border-line bg-surface p-8 text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="rounded-xl border border-line bg-surface p-8 text-center"
+        >
           <p className="text-muted">{t(lang, "score")}</p>
           <p className="mt-2 text-5xl font-bold text-brand tabular-nums">
             {num(lang, score)} / {num(lang, answers.length)}
           </p>
           <div className="mx-auto mt-4 h-2 max-w-xs overflow-hidden rounded-full bg-surface-2">
-            <div className="h-full bg-brand" style={{ width: `${pct}%` }} />
+            <motion.div
+              className="h-full rounded-full bg-brand"
+              initial={{ width: 0 }}
+              animate={{ width: `${pct}%` }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+            />
           </div>
           <p className="mt-2 text-sm text-muted tabular-nums">{num(lang, pct)}%</p>
-          {wrong.length === 0 && <p className="mt-4 font-semibold text-ok">{t(lang, "allCorrect")}</p>}
+          {wrong.length === 0 && (
+            <p className="mt-4 inline-flex items-center gap-1.5 font-semibold text-ok">
+              <CircleCheck className="size-5" aria-hidden />
+              {t(lang, "allCorrect")}
+            </p>
+          )}
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             {wrong.length > 0 && (
-              <button
+              <PressButton
                 onClick={() => start(wrong.map((w) => w.question))}
-                className="rounded-lg bg-brand px-5 py-2.5 font-semibold text-brand-ink hover:opacity-90"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand px-5 py-2.5 font-semibold text-brand-ink transition-opacity hover:opacity-90"
               >
+                <Repeat className="size-4" aria-hidden />
                 {t(lang, "retryWrong")} ({num(lang, wrong.length)})
-              </button>
+              </PressButton>
             )}
-            <button
+            <PressButton
               onClick={() => start(questions)}
-              className={`rounded-lg px-5 py-2.5 font-semibold ${
+              className={`inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-semibold transition-colors ${
                 wrong.length > 0 ? "border border-line hover:bg-surface-2" : "bg-brand text-brand-ink hover:opacity-90"
               }`}
             >
+              <RotateCcw className="size-4" aria-hidden />
               {t(lang, "restart")}
-            </button>
+            </PressButton>
           </div>
-        </div>
+        </motion.div>
 
         {wrong.length > 0 && (
           <section>
             <h2 className="mb-3 text-lg font-semibold">{t(lang, "reviewWrong")}</h2>
-            <ol className="space-y-3">
+            <Stagger className="space-y-3">
               {wrong.map(({ question, selected }, i) => (
-                <li key={question.id} className="rounded-xl border border-line bg-surface p-5">
+                <StaggerItem key={question.id} className="rounded-xl border border-line bg-surface p-5">
                   <p className="font-semibold">
                     {num(lang, i + 1)}. {question.stem}
                   </p>
                   <dl className="mt-3 space-y-1.5 text-sm">
-                    <div className="flex gap-2">
-                      <dt className="shrink-0 text-bad">✗ {t(lang, "yourAnswer")}:</dt>
-                      <dd className="text-bad">{question.options[selected]}</dd>
+                    <div className="flex items-start gap-2 text-bad">
+                      <X className="mt-0.5 size-4 shrink-0" aria-hidden />
+                      <dt className="shrink-0">{t(lang, "yourAnswer")}:</dt>
+                      <dd>{question.options[selected]}</dd>
                     </div>
-                    <div className="flex gap-2">
-                      <dt className="shrink-0 font-semibold text-ok">✓ {t(lang, "correctAnswer")}:</dt>
-                      <dd className="font-semibold text-ok">{question.options[question.correct_index]}</dd>
+                    <div className="flex items-start gap-2 font-semibold text-ok">
+                      <Check className="mt-0.5 size-4 shrink-0" aria-hidden />
+                      <dt className="shrink-0">{t(lang, "correctAnswer")}:</dt>
+                      <dd>{question.options[question.correct_index]}</dd>
                     </div>
                   </dl>
                   {question.explanation && (
@@ -135,9 +156,9 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
                       {question.explanation}
                     </p>
                   )}
-                </li>
+                </StaggerItem>
               ))}
-            </ol>
+            </Stagger>
           </section>
         )}
       </div>
@@ -147,80 +168,138 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
   return (
     <div className="rounded-xl border border-line bg-surface p-5 sm:p-7">
       <div className="flex items-center justify-between text-sm text-muted">
-        <span>
+        <span className="tabular-nums">
           {t(lang, "question")} {num(lang, index + 1)} / {num(lang, order.length)}
         </span>
         {q.source && <span className="rounded-full bg-surface-2 px-2.5 py-0.5">{q.source}</span>}
       </div>
       <div className="mt-3 h-1.5 rounded-full bg-surface-2 overflow-hidden">
-        <div
-          className="h-full bg-brand transition-all"
-          style={{ width: `${(index / order.length) * 100}%` }}
+        <motion.div
+          className="h-full rounded-full bg-brand"
+          initial={false}
+          animate={{ width: `${((index + (answered ? 1 : 0)) / order.length) * 100}%` }}
         />
       </div>
 
-      <p className="mt-6 text-xl font-semibold leading-relaxed">{q.stem}</p>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={`${q.id}-${index}`}
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -24 }}
+          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <p className="mt-6 text-xl font-semibold leading-relaxed">{q.stem}</p>
 
-      <ol className="mt-5 space-y-2.5">
-        {q.options.map((opt, i) => {
-          const isCorrect = i === q.correct_index;
-          const isChosen = i === selected;
-          const state = !answered
-            ? "border-line hover:border-brand hover:bg-brand-soft cursor-pointer"
-            : isCorrect
-              ? "border-ok bg-ok/10"
-              : isChosen
-                ? "border-bad bg-bad/10"
-                : "border-line opacity-60";
-          return (
-            <li key={i}>
-              <button
-                onClick={() => choose(i)}
-                disabled={answered}
-                className={`w-full flex items-start gap-3 rounded-lg border-2 px-4 py-3 text-left transition-colors ${state}`}
-              >
-                <span className="grid place-items-center shrink-0 size-7 rounded-full bg-surface-2 text-sm font-semibold">
-                  {OPTION_LABELS[lang][i]}
-                </span>
-                <span className="pt-0.5">{opt}</span>
-                {answered && isCorrect && (
-                  <span className="ml-auto pt-0.5 font-semibold text-ok" aria-hidden>
-                    ✓
-                  </span>
-                )}
-                {answered && isChosen && !isCorrect && (
-                  <span className="ml-auto pt-0.5 font-semibold text-bad" aria-hidden>
-                    ✗
-                  </span>
-                )}
-              </button>
-            </li>
-          );
-        })}
-      </ol>
+          <ol className="mt-5 space-y-2.5">
+            {q.options.map((opt, i) => {
+              const isCorrect = i === q.correct_index;
+              const isChosen = i === selected;
+              const state = !answered
+                ? "border-line hover:border-brand hover:bg-brand-soft cursor-pointer"
+                : isCorrect
+                  ? "border-ok bg-ok/10"
+                  : isChosen
+                    ? "border-bad bg-bad/10"
+                    : "border-line opacity-60";
+              // Wrong pick shakes once; the right answer gives a small pop.
+              const feedback = !answered
+                ? {}
+                : isChosen && !isCorrect
+                  ? { x: [0, -7, 7, -4, 4, 0] }
+                  : isCorrect
+                    ? { scale: [1, 1.015, 1] }
+                    : {};
+              return (
+                <li key={i}>
+                  <motion.button
+                    onClick={() => choose(i)}
+                    disabled={answered}
+                    whileTap={answered ? undefined : { scale: 0.985 }}
+                    animate={feedback}
+                    transition={{ duration: 0.38 }}
+                    className={`w-full flex items-start gap-3 rounded-lg border-2 px-4 py-3 text-left transition-colors ${state}`}
+                  >
+                    <span className="grid place-items-center shrink-0 size-7 rounded-full bg-surface-2 text-sm font-semibold">
+                      {OPTION_LABELS[lang][i]}
+                    </span>
+                    <span className="pt-0.5">{opt}</span>
+                    <AnimatePresence>
+                      {answered && (isCorrect || isChosen) && (
+                        <motion.span
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          className={`ml-auto shrink-0 grid size-6 place-items-center rounded-full ${
+                            isCorrect ? "bg-ok text-white" : "bg-bad text-white"
+                          }`}
+                          aria-hidden
+                        >
+                          {isCorrect ? (
+                            <Check className="size-4" strokeWidth={3} />
+                          ) : (
+                            <X className="size-4" strokeWidth={3} />
+                          )}
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  </motion.button>
+                </li>
+              );
+            })}
+          </ol>
+        </motion.div>
+      </AnimatePresence>
 
-      {answered ? (
-        <div className="mt-5 space-y-4" aria-live="polite">
-          <p className={`font-semibold ${selected === q.correct_index ? "text-ok" : "text-bad"}`}>
-            {selected === q.correct_index ? t(lang, "correct") : t(lang, "wrong")}
-          </p>
-          {q.explanation && (
-            <div className="rounded-lg bg-surface-2 px-4 py-3">
-              <p className="text-sm font-semibold text-muted">{t(lang, "explanation")}</p>
-              <p className="mt-1">{q.explanation}</p>
-            </div>
-          )}
-          <button
-            onClick={next}
-            autoFocus
-            className="rounded-lg bg-brand text-brand-ink px-5 py-2.5 font-semibold hover:opacity-90"
+      <AnimatePresence mode="wait" initial={false}>
+        {answered ? (
+          <motion.div
+            key="feedback"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="mt-5 space-y-4"
+            aria-live="polite"
           >
-            {isLast ? t(lang, "finish") : t(lang, "next")} <span aria-hidden>→</span>
-          </button>
-        </div>
-      ) : (
-        <p className="mt-5 hidden text-xs text-muted sm:block">{t(lang, "keyboardHint")}</p>
-      )}
+            <p
+              className={`inline-flex items-center gap-1.5 font-semibold ${
+                selected === q.correct_index ? "text-ok" : "text-bad"
+              }`}
+            >
+              {selected === q.correct_index ? (
+                <CircleCheck className="size-5" aria-hidden />
+              ) : (
+                <CircleX className="size-5" aria-hidden />
+              )}
+              {selected === q.correct_index ? t(lang, "correct") : t(lang, "wrong")}
+            </p>
+            {q.explanation && (
+              <div className="rounded-lg bg-surface-2 px-4 py-3">
+                <p className="text-sm font-semibold text-muted">{t(lang, "explanation")}</p>
+                <p className="mt-1">{q.explanation}</p>
+              </div>
+            )}
+            <PressButton
+              onClick={next}
+              autoFocus
+              className="group inline-flex items-center gap-2 rounded-lg bg-brand text-brand-ink px-5 py-2.5 font-semibold transition-opacity hover:opacity-90"
+            >
+              {isLast ? t(lang, "finish") : t(lang, "next")}
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+            </PressButton>
+          </motion.div>
+        ) : (
+          <motion.p
+            key="hint"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="mt-5 hidden items-center gap-1.5 text-xs text-muted sm:inline-flex"
+          >
+            <Keyboard className="size-3.5" aria-hidden />
+            {t(lang, "keyboardHint")}
+          </motion.p>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

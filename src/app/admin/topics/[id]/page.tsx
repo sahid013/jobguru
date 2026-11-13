@@ -1,3 +1,4 @@
+import { Check, ExternalLink, Plus } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getEditorClient } from "@/lib/auth";
@@ -38,9 +39,10 @@ export default async function AdminTopicPage({ params }: PageProps<"/admin/topic
           <div className="flex items-center gap-2">
             <Link
               href={`/subjects/${topic.subject.slug}/${topic.slug}`}
-              className="rounded-md border border-line px-3 py-1.5 text-sm hover:bg-surface-2"
+              className="inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1.5 text-sm transition-colors hover:bg-surface-2"
             >
-              সাইটে দেখুন ↗
+              সাইটে দেখুন
+              <ExternalLink className="size-3.5" aria-hidden />
             </Link>
             <form action={deleteTopic}>
               <input type="hidden" name="id" value={topic.id} />
@@ -58,9 +60,10 @@ export default async function AdminTopicPage({ params }: PageProps<"/admin/topic
           <h2 className="text-lg font-semibold">নোট</h2>
           <Link
             href={`/admin/notes/new?topic=${topic.id}`}
-            className="rounded-lg bg-brand text-brand-ink px-4 py-2 font-semibold hover:opacity-90"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-brand text-brand-ink px-4 py-2 font-semibold transition-opacity hover:opacity-90"
           >
-            + নতুন নোট
+            <Plus className="size-4" aria-hidden />
+            নতুন নোট
           </Link>
         </div>
         {(notes as Note[]).length === 0 ? (
@@ -145,8 +148,15 @@ export default async function AdminTopicPage({ params }: PageProps<"/admin/topic
               </div>
               <ul className="mt-1 grid gap-x-4 text-sm sm:grid-cols-2">
                 {q.options.map((opt, i) => (
-                  <li key={i} className={i === q.correct_index ? "text-ok font-semibold" : "text-muted"}>
-                    {i === q.correct_index ? "✓ " : "· "}
+                  <li
+                    key={i}
+                    className={`flex items-start gap-1.5 ${i === q.correct_index ? "text-ok font-semibold" : "text-muted"}`}
+                  >
+                    {i === q.correct_index ? (
+                      <Check className="mt-1 size-3.5 shrink-0" strokeWidth={3} aria-hidden />
+                    ) : (
+                      <span className="mt-2 size-1 shrink-0 rounded-full bg-current" aria-hidden />
+                    )}
                     {opt}
                   </li>
                 ))}

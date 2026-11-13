@@ -1,3 +1,4 @@
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getEditorClient } from "@/lib/auth";
@@ -18,8 +19,9 @@ export default async function EditNotePage({ params }: PageProps<"/admin/notes/[
   const { topic } = note;
   return (
     <div>
-      <Link href={`/admin/topics/${topic.id}`} className="text-sm text-muted hover:text-brand" lang={topic.subject.lang}>
-        ← {topic.title}
+      <Link href={`/admin/topics/${topic.id}`} className="inline-flex items-center gap-1 text-sm text-muted hover:text-brand" lang={topic.subject.lang}>
+        <ArrowLeft className="size-4" aria-hidden />
+        {topic.title}
       </Link>
       <h1 className="mt-2 mb-6 text-2xl font-bold">নোট এডিট</h1>
       <NoteForm topicId={topic.id} lang={topic.subject.lang} note={note} />

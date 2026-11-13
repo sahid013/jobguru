@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { ArrowRight, BookOpen, ListChecks, MousePointerClick } from "lucide-react";
+import { PressLink, Stagger, StaggerItem } from "@/components/motion";
 import { buildTree, flattenTree, getSubjects, getTopics, getTopicStats, sumStats } from "@/lib/data";
 import { countLabel, num } from "@/lib/i18n";
 
@@ -26,42 +27,45 @@ export default async function HomePage() {
           সিলেবাস ধরে ধরে, নিজের গতিতে প্রস্তুতি
         </h1>
         <p className="mt-3 max-w-2xl text-muted text-lg">
-          প্রতিটি বিষয়ের অধ্যায়, নম্বর বণ্টন, প্রয়োজনীয় বই এবং নোট ও MCQ অনুশীলন — এক জায়গায়।
+          প্রতিটি বিষয়ের অধ্যায়, নম্বর বণ্টন, প্রয়োজনীয় বই, নোট আর MCQ অনুশীলন এক জায়গায়।
         </p>
         {startHere && (
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Link
+            <PressLink
               href={`/subjects/${startHere.subject.slug}`}
-              className="inline-flex items-center gap-2 rounded-lg bg-brand px-5 py-3 font-semibold text-brand-ink hover:opacity-90"
+              className="group inline-flex items-center gap-2 rounded-lg bg-brand px-5 py-3 font-semibold text-brand-ink transition-opacity hover:opacity-90"
             >
               পড়া শুরু করুন
-              <span aria-hidden>→</span>
-            </Link>
-            <Link href="#syllabus" className="rounded-lg border border-line px-5 py-3 font-medium hover:bg-surface-2">
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+            </PressLink>
+            <PressLink
+              href="#syllabus"
+              className="rounded-lg border border-line px-5 py-3 font-medium transition-colors hover:bg-surface-2"
+            >
               সব বিষয় দেখুন
-            </Link>
+            </PressLink>
           </div>
         )}
       </section>
 
-      {/* ── How it works: three steps, no reading required ── */}
-      <section aria-label="কীভাবে ব্যবহার করবেন" className="grid gap-3 sm:grid-cols-3">
-        {[
-          ["১", "বিষয় বাছুন", "নম্বর বণ্টন দেখে ঠিক করুন কোনটা আগে পড়বেন।"],
-          ["২", "টপিক ধরে পড়ুন", "বাঁ পাশের তালিকা থেকে টপিক বেছে নোট পড়ুন।"],
-          ["৩", "MCQ দিয়ে যাচাই করুন", "প্রতিটি টপিকের শেষে অনুশীলন করে ভুলগুলো দেখে নিন।"],
-        ].map(([n, title, body]) => (
-          <div key={n} className="flex gap-3 rounded-xl border border-line bg-surface p-4">
-            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-brand-soft font-bold text-brand">
-              {n}
-            </span>
-            <div>
-              <p className="font-semibold">{title}</p>
-              <p className="mt-0.5 text-sm text-muted">{body}</p>
-            </div>
-          </div>
-        ))}
-      </section>
+      {/* How it works, kept to one quiet line */}
+      <ol
+        aria-label="কীভাবে ব্যবহার করবেন"
+        className="flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-line py-4 text-sm text-muted"
+      >
+        <li className="inline-flex items-center gap-2">
+          <MousePointerClick className="size-4 text-brand" aria-hidden />
+          বিষয় বাছুন
+        </li>
+        <li className="inline-flex items-center gap-2">
+          <BookOpen className="size-4 text-brand" aria-hidden />
+          টপিক ধরে নোট পড়ুন
+        </li>
+        <li className="inline-flex items-center gap-2">
+          <ListChecks className="size-4 text-brand" aria-hidden />
+          MCQ দিয়ে নিজেকে যাচাই করুন
+        </li>
+      </ol>
 
       {/* ── Subjects: marks + what's actually available inside ── */}
       <section id="syllabus" className="scroll-mt-20">
@@ -69,12 +73,12 @@ export default async function HomePage() {
           <h2 className="text-xl font-bold">বিষয় ও পূর্ণমান</h2>
           <p className="text-sm text-muted">মোট {num("bn", total)} নম্বর</p>
         </div>
-        <ul className="grid gap-3 sm:grid-cols-2">
+        <Stagger className="grid gap-3 sm:grid-cols-2">
           {cards.map(({ subject: s, topicCount, notes, questions }) => {
             const empty = topicCount === 0;
             return (
-              <li key={s.id}>
-                <Link
+              <StaggerItem key={s.id}>
+                <PressLink
                   href={`/subjects/${s.slug}`}
                   className={`group flex h-full flex-col gap-3 rounded-xl border bg-surface p-5 transition-colors hover:border-brand ${
                     empty ? "border-dashed border-line" : "border-line"
@@ -102,14 +106,17 @@ export default async function HomePage() {
                         : "নোট ও প্রশ্ন যোগ হচ্ছে"}
                     </p>
                   )}
-                  <span className={`mt-auto text-sm font-medium ${empty ? "text-muted" : "text-brand"}`}>
-                    {empty ? "সিলেবাস দেখুন" : "শুরু করুন"} <span aria-hidden>→</span>
+                  <span
+                    className={`mt-auto inline-flex items-center gap-1 text-sm font-medium ${empty ? "text-muted" : "text-brand"}`}
+                  >
+                    {empty ? "সিলেবাস দেখুন" : "শুরু করুন"}
+                    <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
                   </span>
-                </Link>
-              </li>
+                </PressLink>
+              </StaggerItem>
             );
           })}
-        </ul>
+        </Stagger>
       </section>
     </div>
   );

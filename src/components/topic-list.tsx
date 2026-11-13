@@ -1,3 +1,4 @@
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { descendantIds, sumStats, type TopicStats } from "@/lib/data";
 import type { Lang, Topic, TopicNode } from "@/lib/types";
@@ -34,9 +35,10 @@ export function TopicList({
                 }`}
               >
                 {node.title}
-                <span aria-hidden className="text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-brand">
-                  ›
-                </span>
+                <ChevronRight
+                  className="size-4 text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-brand"
+                  aria-hidden
+                />
               </Link>
               <span className="flex shrink-0 items-center gap-3">
                 <ContentCounts lang={lang} notes={totals.notes} questions={totals.questions} />

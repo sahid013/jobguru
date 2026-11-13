@@ -1,3 +1,4 @@
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { num } from "@/lib/i18n";
 import type { Lang } from "@/lib/types";
@@ -18,12 +19,12 @@ export type Crumb = { href?: string; label: string; lang?: Lang };
 
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
-    <nav aria-label="breadcrumb" className="mb-6 text-sm text-muted flex flex-wrap items-center gap-1.5">
+    <nav aria-label="breadcrumb" className="mb-6 text-sm text-muted flex flex-wrap items-center gap-1">
       {items.map((c, i) => (
-        <span key={i} className="flex items-center gap-1.5" lang={c.lang}>
-          {i > 0 && <span aria-hidden>›</span>}
+        <span key={i} className="flex items-center gap-1" lang={c.lang}>
+          {i > 0 && <ChevronRight className="size-3.5 shrink-0 opacity-60" aria-hidden />}
           {c.href ? (
-            <Link href={c.href} className="hover:text-brand hover:underline">
+            <Link href={c.href} className="rounded transition-colors hover:text-brand">
               {c.label}
             </Link>
           ) : (

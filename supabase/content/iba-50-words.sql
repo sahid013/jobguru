@@ -17,7 +17,7 @@ delete from public.questions where topic_id in ((select id from public.topics wh
 insert into public.notes (topic_id, title, body, published, sort_order)
 values ((select id from public.topics where subject_id = (select id from public.subjects where slug = 'english') and slug = 'iba-50-words'), 'All 50 words — meaning, example & Bangla tip', 'Each entry gives the part of speech, the Bangla meaning, a plain-English definition, an example sentence, and the IBA exam(s) where the word appeared.
 
-প্রতিটি শব্দের নিচে 💡 চিহ্নে বাংলায় মনে রাখার কৌশল, বানানের ফাঁদ ও কাছাকাছি শব্দের পার্থক্য দেওয়া আছে। PDF-এর কয়েকটি বাংলা অর্থ ভুল ছিল (যেমন *obdurate*, *dissonance*)—এখানে সেগুলো সংশোধন করা হয়েছে।
+প্রতিটি শব্দের নিচে **মনে রাখুন** অংশে বাংলায় মনে রাখার কৌশল, বানানের ফাঁদ ও কাছাকাছি শব্দের পার্থক্য দেওয়া আছে।
 
 ---
 
@@ -28,7 +28,7 @@ Something that is unusual or unexpected.
 
 > The student’s poor performance on the latest test was an anomaly since she had previously earned excellent grades.
 
-💡 a- (না) + nomos (নিয়ম) → নিয়মের বাইরে। abnormal-এর সাথে মিলিয়ে মনে রাখুন।
+**মনে রাখুন:** a- (না) + nomos (নিয়ম) → নিয়মের বাইরে। abnormal-এর সাথে মিলিয়ে মনে রাখুন।
 
 ### 2. Equivocal
 *adj.* — **দ্ব্যর্থক, অস্পষ্ট** · IBA BBA ’15
@@ -37,7 +37,7 @@ Not easily understood or explained; open to more than one interpretation.
 
 > Politicians have been known to provide equivocal answers to reporters’ questions.
 
-💡 equi (সমান) + vocal (কথা) → দুই দিকেই যায় এমন কথা। বিপরীত: unequivocal (দ্ব্যর্থহীন, স্পষ্ট)।
+**মনে রাখুন:** equi (সমান) + vocal (কথা) → দুই দিকেই যায় এমন কথা। বিপরীত: unequivocal (দ্ব্যর্থহীন, স্পষ্ট)।
 
 ### 3. Lucid
 *adj.* — **স্পষ্ট, সুবোধ্য** · IBA BBA ’15, ’16
@@ -46,7 +46,7 @@ Very clear and easy to understand.
 
 > The lecture was lucid and straightforward, allowing the students to fully grasp the concepts presented.
 
-💡 luc = আলো (lucifer, translucent)। আলোর মতো পরিষ্কার।
+**মনে রাখুন:** luc = আলো (lucifer, translucent)। আলোর মতো পরিষ্কার।
 
 ### 4. Precipitate
 *verb* — **আকস্মিকভাবে ঘটিয়ে দেওয়া, ত্বরান্বিত করা** · IBA MBA ’11
@@ -55,7 +55,7 @@ To cause something to happen quickly or suddenly.
 
 > The bank’s collapse precipitated a financial crisis across the whole region.
 
-💡 রসায়নের precipitate (অধঃক্ষেপ) নয়—এখানে verb: হঠাৎ কিছু ঘটিয়ে দেওয়া। adj. হিসেবে অর্থ ‘হঠকারী’।
+**মনে রাখুন:** রসায়নের precipitate (অধঃক্ষেপ) নয়—এখানে verb: হঠাৎ কিছু ঘটিয়ে দেওয়া। adj. হিসেবে অর্থ ‘হঠকারী’।
 
 ### 5. Assuage
 *verb* — **প্রশমিত করা, উপশম করা** · IBA MBA ’11, ’13
@@ -64,7 +64,7 @@ To make an unpleasant feeling less intense.
 
 > A massage can assuage the soreness in your muscles.
 
-💡 Assuage (অনুভূতি/ব্যথা কমানো), Placate (রাগী মানুষকে শান্ত করা), Mitigate (ক্ষতি বা তীব্রতা কমানো)—তিনটাই ‘কমানো’, কিন্তু object আলাদা।
+**মনে রাখুন:** Assuage (অনুভূতি/ব্যথা কমানো), Placate (রাগী মানুষকে শান্ত করা), Mitigate (ক্ষতি বা তীব্রতা কমানো)—তিনটাই ‘কমানো’, কিন্তু object আলাদা।
 
 ### 6. Erudite
 *adj.* — **পণ্ডিত, জ্ঞানী** · IBA MBA ’13
@@ -80,7 +80,7 @@ Not able to be seen through; not easily understood.
 
 > Medical jargon includes many opaque terms that mean little to ordinary patients.
 
-💡 transparent (স্বচ্ছ) → translucent (ঈষৎ স্বচ্ছ) → opaque (অস্বচ্ছ)।
+**মনে রাখুন:** transparent (স্বচ্ছ) → translucent (ঈষৎ স্বচ্ছ) → opaque (অস্বচ্ছ)।
 
 ### 8. Prodigal
 *adj.* — **অমিতব্যয়ী, অপব্যয়ী** · IBA MBA ’21
@@ -89,7 +89,7 @@ Wastefully extravagant.
 
 > The prodigal prince bought lavish gifts and planned expensive events.
 
-💡 Prodigal (অমিতব্যয়ী) ≠ Prodigy (বিস্ময়কর প্রতিভা)। ‘The Prodigal Son’ গল্পটা মনে রাখুন—সব টাকা উড়িয়ে ফিরে আসা ছেলে।
+**মনে রাখুন:** Prodigal (অমিতব্যয়ী) ≠ Prodigy (বিস্ময়কর প্রতিভা)। ‘The Prodigal Son’ গল্পটা মনে রাখুন—সব টাকা উড়িয়ে ফিরে আসা ছেলে।
 
 ### 9. Enigma
 *noun* — **রহস্য, হেঁয়ালি** · IBA MBA ’11
@@ -98,7 +98,7 @@ A person or thing that is mysterious, puzzling, or difficult to understand.
 
 > Scientists continue to research cancer to solve the enigma of its primary cause.
 
-💡 adj. enigmatic = রহস্যময়। Mona Lisa-র ‘enigmatic smile’।
+**মনে রাখুন:** adj. enigmatic = রহস্যময়। Mona Lisa-র ‘enigmatic smile’।
 
 ### 10. Fervor
 *noun* — **তীব্র আবেগ, প্রবল উৎসাহ** · IBA MBA ’07
@@ -107,7 +107,7 @@ Great warmth or intensity of feeling; passion; zeal.
 
 > The child showed a great fervor for superheroes, poring over comic books for hours.
 
-💡 PDF-এ adj. লেখা থাকলেও Fervor একটি noun; adj. হলো fervent। fever (জ্বর)-এর মতো উত্তাপ = তীব্র আবেগ।
+**মনে রাখুন:** Fervor একটি noun; adj. হলো fervent। fever (জ্বর)-এর মতো উত্তাপ = তীব্র আবেগ।
 
 ### 11. Placate
 *verb* — **শান্ত করা, তুষ্ট করা** · IBA MBA ’11
@@ -116,7 +116,7 @@ To make someone less angry or hostile.
 
 > A parent may decide to placate a crying baby with a pacifier.
 
-💡 Placate-এর object সবসময় মানুষ (রাগী কাউকে ঠান্ডা করা)। Pacify, appease কাছাকাছি।
+**মনে রাখুন:** Placate-এর object সবসময় মানুষ (রাগী কাউকে ঠান্ডা করা)। Pacify, appease কাছাকাছি।
 
 ### 12. Zeal
 *noun* — **প্রবল আগ্রহ, উদ্দীপনা** · IBA MBA ’14
@@ -125,7 +125,7 @@ Strong enthusiasm and determination to do something.
 
 > The great emperor’s crusading zeal led him to conquer many lands.
 
-💡 zealous (adj.) = উদ্যমী; zealot = গোঁড়া/অন্ধ সমর্থক।
+**মনে রাখুন:** zealous (adj.) = উদ্যমী; zealot = গোঁড়া/অন্ধ সমর্থক।
 
 ### 13. Abstain
 *verb* — **বিরত থাকা** · IBA MBA ’05
@@ -134,7 +134,7 @@ To restrain oneself from doing or enjoying something.
 
 > Doctors encourage their patients to abstain from smoking cigarettes.
 
-💡 abstain from + noun/‑ing। noun: abstinence (সংযম)। ভোটে ‘abstain’ = ভোটদানে বিরত থাকা।
+**মনে রাখুন:** abstain from + noun/‑ing। noun: abstinence (সংযম)। ভোটে ‘abstain’ = ভোটদানে বিরত থাকা।
 
 ### 14. Audacious
 *adj.* — **দুঃসাহসী; ধৃষ্ট** · IBA MBA ’23
@@ -143,7 +143,7 @@ Willing to take bold risks; or showing a lack of respect.
 
 > The new CEO pursued audacious initiatives to save the company from bankruptcy.
 
-💡 দুই অর্থ: সাহসী (positive) এবং বেয়াদব/ধৃষ্ট (negative)। বাক্যের context দেখে বুঝুন। noun: audacity।
+**মনে রাখুন:** দুই অর্থ: সাহসী (positive) এবং বেয়াদব/ধৃষ্ট (negative)। বাক্যের context দেখে বুঝুন। noun: audacity।
 
 ### 15. Desiccate
 *verb* — **শুষ্ক করা, শুকিয়ে ফেলা** · IBA MBA ’22
@@ -152,7 +152,7 @@ To remove the moisture from something; dry out.
 
 > The heat and energy from the sun can desiccate even the hardiest plants.
 
-💡 বানান খেয়াল করুন: একটি s, দুটি c। desiccated coconut = শুকনো নারকেল।
+**মনে রাখুন:** বানান খেয়াল করুন: একটি s, দুটি c। desiccated coconut = শুকনো নারকেল।
 
 ### 16. Gullible
 *adj.* — **সহজে বিশ্বাস করে এমন, সরল-বিশ্বাসী** · IBA BBA ’23
@@ -161,7 +161,7 @@ Easily persuaded to believe something; easily fooled.
 
 > The gullible little boy gave his older sister all of his allowance because she told him she would buy a pony for him.
 
-💡 gull (verb) = ঠকানো → gullible = যাকে সহজে ঠকানো যায়। Credulous সমার্থক।
+**মনে রাখুন:** gull (verb) = ঠকানো → gullible = যাকে সহজে ঠকানো যায়। Credulous সমার্থক।
 
 ### 17. Laudable
 *adj.* — **প্রশংসনীয়** · IBA BBA ’15
@@ -170,7 +170,7 @@ Deserving praise and commendation.
 
 > Providing affordable healthcare for all citizens is a laudable goal.
 
-💡 laud = প্রশংসা করা (applaud-এর laud)। Commendable, praiseworthy সমার্থক।
+**মনে রাখুন:** laud = প্রশংসা করা (applaud-এর laud)। Commendable, praiseworthy সমার্থক।
 
 ### 18. Pedant
 *noun* — **বিদ্যাবাগীশ, জ্ঞান জাহির করা ব্যক্তি** · IBA MBA ’23
@@ -179,7 +179,7 @@ A person who makes an excessive display of learning or fusses over minor rules.
 
 > Professor Blackwell, a well-known pedant, required his pre-med students to speak in Latin throughout the entire semester.
 
-💡 adj. pedantic = খুঁটিনাটি নিয়ম নিয়ে অতিরিক্ত খুঁতখুঁতে।
+**মনে রাখুন:** adj. pedantic = খুঁটিনাটি নিয়ম নিয়ে অতিরিক্ত খুঁতখুঁতে।
 
 ### 19. Vacillate
 *verb* — **ইতস্তত করা, দ্বিধায় দোলা** · IBA MBA ’22
@@ -188,7 +188,7 @@ To waver between different opinions or actions.
 
 > Undergraduate students often vacillate among various majors before deciding which degree to pursue.
 
-💡 Vacillate ও Waver—দুটোরই অর্থ সিদ্ধান্তে দোদুল্যমান থাকা। Vacillate তুলনামূলক formal।
+**মনে রাখুন:** Vacillate ও Waver—দুটোরই অর্থ সিদ্ধান্তে দোদুল্যমান থাকা। Vacillate তুলনামূলক formal।
 
 ### 20. Capricious
 *adj.* — **খামখেয়ালি** · IBA BBA ’11
@@ -197,7 +197,7 @@ Given to sudden and unpredictable changes of mood or behavior.
 
 > The capricious supervisor would hand out raises one day and fire his entire staff the next.
 
-💡 noun: caprice (খেয়াল)। Capricious সাধারণত মানুষের মেজাজ, Volatile পরিস্থিতি/বাজার—দুটোই অস্থির।
+**মনে রাখুন:** noun: caprice (খেয়াল)। Capricious সাধারণত মানুষের মেজাজ, Volatile পরিস্থিতি/বাজার—দুটোই অস্থির।
 
 ### 21. Homogeneous
 *adj.* — **একই রকমের, সমজাতীয়** · IBA MBA ’05
@@ -206,7 +206,7 @@ Of the same or similar kind.
 
 > There are very few truly homogeneous cultures since social diversity is increasingly widespread.
 
-💡 homo (একই) + genus (জাত)। বিপরীত: heterogeneous (বিষমজাতীয়)। PDF-এর ‘homogenous’ বানানটিও প্রচলিত।
+**মনে রাখুন:** homo (একই) + genus (জাত)। বিপরীত: heterogeneous (বিষমজাতীয়)। ‘homogenous’ বানানটিও প্রচলিত।
 
 ### 22. Loquacious
 *adj.* — **বাচাল, বেশি কথা বলে এমন** · IBA MBA ’24
@@ -215,7 +215,7 @@ Tending to talk a great deal.
 
 > The loquacious professor was known for his five-hour lectures.
 
-💡 loqu = কথা (eloquent, colloquial)। Loquacious ও Garrulous = বাচাল; বিপরীত Laconic ও Taciturn = স্বল্পভাষী।
+**মনে রাখুন:** loqu = কথা (eloquent, colloquial)। Loquacious ও Garrulous = বাচাল; বিপরীত Laconic ও Taciturn = স্বল্পভাষী।
 
 ### 23. Pragmatic
 *adj.* — **বাস্তববাদী** · IBA MBA ’05, ’23
@@ -224,7 +224,7 @@ Dealing with problems in a practical, sensible way rather than by theory.
 
 > A pragmatic approach to legislation can be difficult given the complexities of politics.
 
-💡 noun: pragmatism। Practical, realistic সমার্থক; বিপরীত idealistic।
+**মনে রাখুন:** noun: pragmatism। Practical, realistic সমার্থক; বিপরীত idealistic।
 
 ### 24. Volatile
 *adj.* — **অস্থির, বারবার পরিবর্তনশীল** · IBA BBA ’11
@@ -233,7 +233,7 @@ Likely to change rapidly and unpredictably.
 
 > It is possible for a country’s political climate to remain volatile for decades.
 
-💡 রসায়নে volatile = উদ্বায়ী (সহজে বাষ্প হয়)। শেয়ারবাজার, রাজনীতি, মেজাজ—সবই volatile হতে পারে।
+**মনে রাখুন:** রসায়নে volatile = উদ্বায়ী (সহজে বাষ্প হয়)। শেয়ারবাজার, রাজনীতি, মেজাজ—সবই volatile হতে পারে।
 
 ### 25. Torpor
 *noun* — **আলস্য, জড়তা** · IBA BBA ’11
@@ -242,7 +242,7 @@ A state of physical or mental inactivity; lethargy.
 
 > The more time in the day the patient is idle, the more he is likely to sink into a torpor.
 
-💡 Torpor (noun, জড়তা), Lethargic (adj., অলস), Enervate (verb, দুর্বল করা)—একই পরিবারের তিন রূপ।
+**মনে রাখুন:** Torpor (noun, জড়তা), Lethargic (adj., অলস), Enervate (verb, দুর্বল করা)—একই পরিবারের তিন রূপ।
 
 ### 26. Corroborate
 *verb* — **সমর্থন করা, প্রমাণ দিয়ে নিশ্চিত করা** · IBA MBA ’16
@@ -251,7 +251,7 @@ To confirm or give support to a statement or theory.
 
 > The scientist was able to corroborate his hypothesis with data gathered from multiple sources.
 
-💡 Corroborate = প্রমাণ/সাক্ষ্য দিয়ে নিশ্চিত করা; Bolster = শক্তিশালী করা। সাক্ষী corroborate করে, যুক্তি bolster করে।
+**মনে রাখুন:** Corroborate = প্রমাণ/সাক্ষ্য দিয়ে নিশ্চিত করা; Bolster = শক্তিশালী করা। সাক্ষী corroborate করে, যুক্তি bolster করে।
 
 ### 27. Ephemeral
 *adj.* — **ক্ষণস্থায়ী** · IBA MBA ’23
@@ -260,7 +260,7 @@ Lasting for a very short time.
 
 > An ephemeral moment of victory may last mere seconds, but it can remain as a triumphant memory for decades.
 
-💡 Transient, fleeting, short-lived সমার্থক। বিপরীত: permanent, eternal।
+**মনে রাখুন:** Transient, fleeting, short-lived সমার্থক। বিপরীত: permanent, eternal।
 
 ### 28. Laconic
 *adj.* — **স্বল্পভাষী, সংক্ষিপ্ত** · IBA MBA ’22
@@ -269,7 +269,7 @@ Using very few words.
 
 > The student’s laconic response suggested that she did not know very much about the topic.
 
-💡 স্পার্টার Laconia অঞ্চলের মানুষ কম কথা বলত—সেখান থেকেই শব্দটি। Terse, concise সমার্থক।
+**মনে রাখুন:** স্পার্টার Laconia অঞ্চলের মানুষ কম কথা বলত—সেখান থেকেই শব্দটি। Terse, concise সমার্থক।
 
 ### 29. Mitigate
 *verb* — **প্রশমিত করা, লাঘব করা** · IBA MBA ’06
@@ -278,7 +278,7 @@ To make something less severe, serious, or painful.
 
 > We want to mitigate students’ exam stress by offering helpful study tools.
 
-💡 mitigate risk / damage / impact—ক্ষতি বা তীব্রতা কমানো। Alleviate সমার্থক; বিপরীত aggravate।
+**মনে রাখুন:** mitigate risk / damage / impact—ক্ষতি বা তীব্রতা কমানো। Alleviate সমার্থক; বিপরীত aggravate।
 
 ### 30. Propriety
 *noun* — **শালীনতা, ঔচিত্য** · IBA MBA ’22
@@ -287,7 +287,7 @@ The state or quality of being correct or proper; conformity to accepted standard
 
 > The students were instructed to behave with the utmost propriety while on their class field trip.
 
-💡 Propriety (শালীনতা) ≠ Property (সম্পত্তি) ≠ Proprietor (মালিক)। বিপরীত: impropriety।
+**মনে রাখুন:** Propriety (শালীনতা) ≠ Property (সম্পত্তি) ≠ Proprietor (মালিক)। বিপরীত: impropriety।
 
 ### 31. Inchoate
 *adj.* — **অঙ্কুরাবস্থার, অপরিণত** · IBA BBA ’11
@@ -296,7 +296,7 @@ Just begun and so not fully formed or developed.
 
 > She had a child’s inchoate awareness of language.
 
-💡 উচ্চারণ: ইন-কো-য়েট। Rudimentary, nascent সমার্থক।
+**মনে রাখুন:** উচ্চারণ: ইন-কো-য়েট। Rudimentary, nascent সমার্থক।
 
 ### 32. Cacophony
 *noun* — **কর্কশ, বেসুরো শব্দের মিশ্রণ** · IBA MBA ’24
@@ -305,7 +305,7 @@ A harsh, unpleasant mixture of sounds.
 
 > The cacophony of the middle school band warming up was nearly unbearable for the audience.
 
-💡 caco (খারাপ) + phony (শব্দ)। বিপরীত: euphony (শ্রুতিমধুর ধ্বনি)।
+**মনে রাখুন:** caco (খারাপ) + phony (শব্দ)। বিপরীত: euphony (শ্রুতিমধুর ধ্বনি)।
 
 ### 33. Enervate
 *verb* — **দুর্বল করে ফেলা, শক্তি নিঃশেষ করা** · IBA BBA ’21
@@ -314,7 +314,7 @@ To cause someone to feel drained of energy; weaken.
 
 > The boxer used a swift left uppercut to the jaw to enervate his opponent.
 
-💡 ⚠ সবচেয়ে বড় ফাঁদ: Enervate শুনতে energize-এর মতো, কিন্তু অর্থ উল্টো—দুর্বল করা। Invigorate = চাঙ্গা করা।
+**মনে রাখুন:** ⚠ সবচেয়ে বড় ফাঁদ: Enervate শুনতে energize-এর মতো, কিন্তু অর্থ উল্টো—দুর্বল করা। Invigorate = চাঙ্গা করা।
 
 ### 34. Ingenuous
 *adj.* — **সরল, সাদাসিধা, অকপট** · IBA MBA ’16
@@ -323,7 +323,7 @@ Innocent and unsuspecting; naive.
 
 > The scam artist preyed on ingenuous nursing home residents.
 
-💡 ⚠ Ingenuous (সরল) ≠ Ingenious (উদ্ভাবনী, বুদ্ধিমান)। IBA-র প্রিয় ফাঁদ। noun: ingenuousness vs ingenuity।
+**মনে রাখুন:** ⚠ Ingenuous (সরল) ≠ Ingenious (উদ্ভাবনী, বুদ্ধিমান)। IBA-র প্রিয় ফাঁদ। noun: ingenuousness vs ingenuity।
 
 ### 35. Epiphany
 *noun* — **আকস্মিক বোধোদয়, হঠাৎ উপলব্ধি** · IBA BBA ’19
@@ -332,7 +332,7 @@ A moment of sudden and great revelation or realization.
 
 > Seeing her father again when she was an adult was an epiphany that changed her whole view of her childhood.
 
-💡 হঠাৎ ‘ইউরেকা!’ মুহূর্ত।
+**মনে রাখুন:** হঠাৎ ‘ইউরেকা!’ মুহূর্ত।
 
 ### 36. Paradox
 *noun* — **স্ববিরোধিতা, আপাতবিরোধী উক্তি** · IBA MBA ’24
@@ -341,7 +341,7 @@ A statement that seems to contradict itself but may be true.
 
 > The fact that the retired teacher claimed to hate all pets but adopted seven cats is an intriguing paradox.
 
-💡 ‘Less is more’—একটি paradox। adj. paradoxical।
+**মনে রাখুন:** ‘Less is more’—একটি paradox। adj. paradoxical।
 
 ### 37. Venerate
 *verb* — **শ্রদ্ধা করা, ভক্তি করা** · IBA MBA ’23
@@ -350,7 +350,7 @@ To regard with great respect; revere.
 
 > To venerate the fire chief’s forty years of service, the department held a special banquet.
 
-💡 venerable (adj.) = শ্রদ্ধেয়। Venerate (শ্রদ্ধা) ↔ Deride (উপহাস)—বিপরীত জোড়া।
+**মনে রাখুন:** venerable (adj.) = শ্রদ্ধেয়। Venerate (শ্রদ্ধা) ↔ Deride (উপহাস)—বিপরীত জোড়া।
 
 ### 38. Shun
 *verb* — **এড়িয়ে চলা, পরিহার করা** · IBA MBA ’13
@@ -359,7 +359,7 @@ To persistently avoid or reject.
 
 > She has shunned publicity since she retired from acting.
 
-💡 Shun = ইচ্ছাকৃতভাবে দূরে থাকা (কাউকে/কিছুকে); Abstain = নিজে কোনো কাজ থেকে বিরত থাকা।
+**মনে রাখুন:** Shun = ইচ্ছাকৃতভাবে দূরে থাকা (কাউকে/কিছুকে); Abstain = নিজে কোনো কাজ থেকে বিরত থাকা।
 
 ### 39. Deride
 *verb* — **উপহাস করা, বিদ্রূপ করা** · IBA MBA ’12
@@ -368,7 +368,7 @@ To express contempt for; ridicule.
 
 > The unreasonable supervisor was known to deride his employees on a daily basis.
 
-💡 noun: derision; adj. derisive। PDF-এ ‘ঘৃণা’ লেখা আছে, কিন্তু মূল অর্থ উপহাস/বিদ্রূপ করা (mock, ridicule)।
+**মনে রাখুন:** noun: derision; adj. derisive। Mock, ridicule সমার্থক; বিপরীত praise, venerate।
 
 ### 40. Eulogy
 *noun* — **স্তুতিবাক্য, প্রশংসা-বক্তৃতা** · IBA MBA ’05
@@ -377,7 +377,7 @@ A speech or writing that praises someone, typically one who has recently died.
 
 > The rabbi’s eulogy was both heartfelt and inspiring.
 
-💡 eu (ভালো) + logy (কথা)। Eulogy = প্রশংসা-বক্তৃতা; Elegy = শোকগাথা (কবিতা); Obituary = মৃত্যুসংবাদ।
+**মনে রাখুন:** eu (ভালো) + logy (কথা)। Eulogy = প্রশংসা-বক্তৃতা; Elegy = শোকগাথা (কবিতা); Obituary = মৃত্যুসংবাদ।
 
 ### 41. Lethargic
 *adj.* — **অলস, শক্তিহীন, নিস্তেজ** · IBA BBA ’15
@@ -386,7 +386,7 @@ Lacking energy and enthusiasm; sluggish.
 
 > It’s not uncommon to feel lethargic for weeks or even months after major surgery.
 
-💡 noun: lethargy। Sluggish, listless সমার্থক; বিপরীত energetic।
+**মনে রাখুন:** noun: lethargy। Sluggish, listless সমার্থক; বিপরীত energetic।
 
 ### 42. Obdurate
 *adj.* — **একগুঁয়ে, অনমনীয়** · IBA BBA ’21
@@ -395,7 +395,7 @@ Stubbornly refusing to change one’s opinion or course of action.
 
 > The obdurate three-year-old refused to eat any vegetables, no matter how they were prepared.
 
-💡 ⚠ PDF-এ ‘বাধ্য’ লেখা আছে—এটি ভুল। সঠিক অর্থ একগুঁয়ে (stubborn, obstinate, adamant)। dur = শক্ত (durable)।
+**মনে রাখুন:** dur = শক্ত (durable)। Stubborn, obstinate, adamant সমার্থক; বিপরীত flexible, compliant।
 
 ### 43. Philanthropic
 *adj.* — **পরোপকারী, মানবহিতৈষী** · IBA BBA ’20
@@ -404,7 +404,7 @@ Seeking to promote the welfare of others, especially by donating money.
 
 > The students were grateful to receive financial support from philanthropic organizations that promote education.
 
-💡 phil (ভালোবাসা) + anthropo (মানুষ)। noun: philanthropy, philanthropist। বিপরীত: misanthropic (মানববিদ্বেষী)।
+**মনে রাখুন:** phil (ভালোবাসা) + anthropo (মানুষ)। noun: philanthropy, philanthropist। বিপরীত: misanthropic (মানববিদ্বেষী)।
 
 ### 44. Waver
 *verb* — **দ্বিধা করা, দোদুল্যমান হওয়া** · IBA BBA ’09, MBA ’11
@@ -413,7 +413,7 @@ To go back and forth between choices or opinions; be indecisive.
 
 > Some citizens vote solely along party lines and never waver in their political decisions.
 
-💡 Waver (দ্বিধা করা) ≠ Waiver (মওকুফ, ছাড়পত্র)—বানান ও অর্থ দুটোই আলাদা।
+**মনে রাখুন:** Waver (দ্বিধা করা) ≠ Waiver (মওকুফ, ছাড়পত্র)—বানান ও অর্থ দুটোই আলাদা।
 
 ### 45. Bolster
 *verb* — **শক্তিশালী করা, জোরদার করা** · IBA MBA ’05
@@ -422,7 +422,7 @@ To support or strengthen.
 
 > The prosecutor worked to find evidence that would bolster her case against the defendant.
 
-💡 bolster আসলে লম্বা বালিশ—যা ঠেকা দেয়। bolster confidence / economy / argument।
+**মনে রাখুন:** bolster আসলে লম্বা বালিশ—যা ঠেকা দেয়। bolster confidence / economy / argument।
 
 ### 46. Dissonance
 *noun* — **অসঙ্গতি, বেসুর, মতবিরোধ** · IBA MBA ’05
@@ -431,7 +431,7 @@ A lack of harmony or agreement.
 
 > The school board’s meeting lasted for hours due to the lengthy debate fueled by dissonance among opinions.
 
-💡 ⚠ PDF-এ ‘ঔদাসীন্য’ লেখা আছে—এটি ভুল। dis (না) + sonance (সুর) → বেসুর/অসঙ্গতি। বিপরীত: consonance, harmony। ‘Cognitive dissonance’ মনে রাখুন।
+**মনে রাখুন:** dis (না) + sonance (সুর) → বেসুর/অসঙ্গতি। বিপরীত: consonance, harmony। ‘Cognitive dissonance’ মনে রাখুন।
 
 ### 47. Garrulous
 *adj.* — **বাচাল, অতিরিক্ত কথা বলে এমন** · IBA BBA ’14
@@ -440,7 +440,7 @@ Excessively talkative, especially about trivial matters.
 
 > The garrulous hair stylist talked to each customer for hours at a time.
 
-💡 Garrulous-এ একটু নেতিবাচক ছোঁয়া আছে (অকারণে বকবক); Loquacious তুলনামূলক নিরপেক্ষ।
+**মনে রাখুন:** Garrulous-এ একটু নেতিবাচক ছোঁয়া আছে (অকারণে বকবক); Loquacious তুলনামূলক নিরপেক্ষ।
 
 ### 48. Pliable
 *adj.* — **নমনীয়; সহজে প্রভাবিত হয় এমন** · IBA BBA ’19
@@ -449,7 +449,7 @@ Easily bent or shaped; easily influenced; malleable.
 
 > Children’s moods are often pliable since children are greatly affected by their surroundings.
 
-💡 ply = ভাঁজ করা। আক্ষরিক অর্থে সহজে বাঁকে (pliable wire), রূপক অর্থে সহজে প্রভাবিত হয়। Malleable, flexible সমার্থক।
+**মনে রাখুন:** ply = ভাঁজ করা। আক্ষরিক অর্থে সহজে বাঁকে (pliable wire), রূপক অর্থে সহজে প্রভাবিত হয়। Malleable, flexible সমার্থক।
 
 ### 49. Ostentation
 *noun* — **জাঁকজমক, লোকদেখানো আড়ম্বর**
@@ -458,7 +458,7 @@ A pretentious or showy display, especially of wealth.
 
 > Owning a mansion doesn’t imply ostentation, but traveling exclusively by private jet certainly can.
 
-💡 adj. ostentatious = লোকদেখানো। ‘Flaunt’ (verb) কাছাকাছি।
+**মনে রাখুন:** adj. ostentatious = লোকদেখানো। ‘Flaunt’ (verb) কাছাকাছি।
 
 ### 50. Prevaricate
 *verb* — **সত্য এড়িয়ে যাওয়া, কথা ঘোরানো**
@@ -467,7 +467,7 @@ To avoid telling the truth by not directly answering a question.
 
 > During the trial, the lead witness was willing to prevaricate in order to protect his friend.
 
-💡 সরাসরি মিথ্যা নয়—ঘুরিয়ে-পেঁচিয়ে সত্য এড়ানো। Equivocate, evade সমার্থক। Procrastinate (দেরি করা)-র সাথে গুলিয়ে ফেলবেন না।
+**মনে রাখুন:** সরাসরি মিথ্যা নয়—ঘুরিয়ে-পেঁচিয়ে সত্য এড়ানো। Equivocate, evade সমার্থক। Procrastinate (দেরি করা)-র সাথে গুলিয়ে ফেলবেন না।
 
 ---
 

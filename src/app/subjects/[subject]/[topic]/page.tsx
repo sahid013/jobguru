@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { ContentCounts } from "@/components/content-counts";
 import { EmptyState } from "@/components/empty-state";
 import { Markdown } from "@/components/markdown";
+import { PressLink } from "@/components/motion";
 import { Breadcrumbs, MarksBadge, PageSkeleton } from "@/components/ui";
 import {
   ancestors,
@@ -82,12 +84,13 @@ async function TopicContent({ params }: Pick<Props, "params">) {
         <p className="font-semibold">{t(lang, "practiceHint")}</p>
         <p className="text-sm text-muted">{countLabel(lang, "questions", questionCount)}</p>
       </div>
-      <Link
+      <PressLink
         href={`${href(topic.slug)}/practice`}
-        className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2.5 font-semibold text-brand-ink hover:opacity-90"
+        className="group inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2.5 font-semibold text-brand-ink transition-opacity hover:opacity-90"
       >
-        {t(lang, "practice")} <span aria-hidden>→</span>
-      </Link>
+        {t(lang, "practice")}
+        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+      </PressLink>
     </section>
   );
 
@@ -135,9 +138,10 @@ async function TopicContent({ params }: Pick<Props, "params">) {
                   >
                     <span className="flex items-start justify-between gap-2">
                       <span className="font-semibold group-hover:text-brand">{c.title}</span>
-                      <span aria-hidden className="text-muted group-hover:text-brand">
-                        ›
-                      </span>
+                      <ChevronRight
+                        className="mt-0.5 size-4 shrink-0 text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-brand"
+                        aria-hidden
+                      />
                     </span>
                     {c.points.length > 0 && (
                       <span className="mt-1 block text-sm text-muted">{c.points.join(" · ")}</span>
@@ -171,9 +175,13 @@ async function TopicContent({ params }: Pick<Props, "params">) {
           body={t(lang, "emptyTopicBody")}
           action={
             next && (
-              <Link href={href(next.slug)} className="rounded-lg bg-brand px-4 py-2 font-semibold text-brand-ink hover:opacity-90">
-                {t(lang, "nextTopic")}: {next.title} <span aria-hidden>→</span>
-              </Link>
+              <PressLink
+                href={href(next.slug)}
+                className="group inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 font-semibold text-brand-ink transition-opacity hover:opacity-90"
+              >
+                {t(lang, "nextTopic")}: {next.title}
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+              </PressLink>
             )
           }
         />
@@ -182,30 +190,39 @@ async function TopicContent({ params }: Pick<Props, "params">) {
       {/* Keep moving through the syllabus without going back to the list */}
       <nav aria-label={t(lang, "topics")} className="grid gap-3 border-t border-line pt-6 sm:grid-cols-2">
         {prev ? (
-          <Link href={href(prev.slug)} className="group rounded-lg border border-line bg-surface px-4 py-3 hover:border-brand">
-            <span className="text-xs text-muted">
-              <span aria-hidden>←</span> {t(lang, "prevTopic")}
+          <PressLink
+            href={href(prev.slug)}
+            className="group rounded-lg border border-line bg-surface px-4 py-3 transition-colors hover:border-brand"
+          >
+            <span className="inline-flex items-center gap-1 text-xs text-muted">
+              <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" aria-hidden />
+              {t(lang, "prevTopic")}
             </span>
             <span className="mt-0.5 block font-semibold group-hover:text-brand">{prev.title}</span>
-          </Link>
+          </PressLink>
         ) : (
-          <Link href={`/subjects/${subject.slug}`} className="group rounded-lg border border-line bg-surface px-4 py-3 hover:border-brand">
-            <span className="text-xs text-muted">
-              <span aria-hidden>←</span> {t(lang, "backToOverview")}
+          <PressLink
+            href={`/subjects/${subject.slug}`}
+            className="group rounded-lg border border-line bg-surface px-4 py-3 transition-colors hover:border-brand"
+          >
+            <span className="inline-flex items-center gap-1 text-xs text-muted">
+              <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" aria-hidden />
+              {t(lang, "backToOverview")}
             </span>
             <span className="mt-0.5 block font-semibold group-hover:text-brand">{subject.title}</span>
-          </Link>
+          </PressLink>
         )}
         {next && (
-          <Link
+          <PressLink
             href={href(next.slug)}
-            className="group rounded-lg border border-line bg-surface px-4 py-3 text-right hover:border-brand sm:col-start-2"
+            className="group rounded-lg border border-line bg-surface px-4 py-3 text-right transition-colors hover:border-brand sm:col-start-2"
           >
-            <span className="text-xs text-muted">
-              {t(lang, "nextTopic")} <span aria-hidden>→</span>
+            <span className="inline-flex items-center gap-1 text-xs text-muted">
+              {t(lang, "nextTopic")}
+              <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
             </span>
             <span className="mt-0.5 block font-semibold group-hover:text-brand">{next.title}</span>
-          </Link>
+          </PressLink>
         )}
       </nav>
     </article>

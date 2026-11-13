@@ -1,5 +1,6 @@
 "use client";
 
+import { LogIn, LogOut, PenLine } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -64,13 +65,14 @@ export function AuthMenu() {
     router.refresh();
   }
 
-  const item = "px-3 py-2 rounded-md hover:bg-surface-2";
+  const item = "inline-flex items-center gap-1.5 px-3 py-2 rounded-md transition-colors hover:bg-surface-2";
 
   if (state.status === "loading") return <span className="inline-block w-14 h-9" aria-hidden />;
 
   if (state.status === "out") {
     return (
       <Link href="/login" className={item}>
+        <LogIn className="size-4" aria-hidden />
         লগইন
       </Link>
     );
@@ -79,12 +81,18 @@ export function AuthMenu() {
   return (
     <>
       {state.canEdit && (
-        <Link href="/admin" className="px-3 py-2 rounded-md bg-brand-soft text-brand font-medium hover:opacity-90">
-          কন্টেন্ট যোগ
+        <Link
+          href="/admin"
+          aria-label="কন্টেন্ট যোগ"
+          className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-brand-soft text-brand font-medium transition-opacity hover:opacity-90"
+        >
+          <PenLine className="size-4" aria-hidden />
+          <span className="hidden sm:inline">কন্টেন্ট যোগ</span>
         </Link>
       )}
-      <button onClick={signOut} title={state.email} className={`${item} text-muted`}>
-        লগআউট
+      <button onClick={signOut} title={state.email} aria-label="লগআউট" className={`${item} text-muted`}>
+        <LogOut className="size-4" aria-hidden />
+        <span className="hidden sm:inline">লগআউট</span>
       </button>
     </>
   );

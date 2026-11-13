@@ -1,11 +1,14 @@
 "use client";
 
+import { ArrowLeft, ChevronRight, LayoutDashboard } from "lucide-react";
+import { LayoutGroup, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import type { TopicStats } from "@/lib/data";
 import type { Lang, TopicNode } from "@/lib/types";
 import { ContentCounts } from "./content-counts";
+import { Collapse, Rotate, spring } from "./motion";
 
 type Props = {
   subjectSlug: string;
@@ -19,7 +22,7 @@ type Props = {
 export function SubjectSidebar({ subjectSlug, subjectTitle, lang, tree, stats, labels }: Props) {
   const pathname = usePathname();
   const base = `/subjects/${subjectSlug}`;
-  // /subjects/<subject>/<topic>[/practice] → the active topic slug
+  // /subjects/<subject>/<topic>[/practice] gives the active topic slug
   const activeSlug = pathname.startsWith(`${base}/`) ? pathname.slice(base.length + 1).split("/")[0] : null;
   const activePath = activeSlug ? pathTo(tree, activeSlug) : [];
   const activeTitle = activeSlug ? findTitle(tree, activeSlug) : null;
@@ -34,20 +37,25 @@ export function SubjectSidebar({ subjectSlug, subjectTitle, lang, tree, stats, l
   const mobileOpen = openOn === pathname;
   const setMobileOpen = (open: boolean) => setOpenOn(open ? pathname : null);
 
-  const nav = (
-    <nav lang={lang} className="text-[0.95rem]">
-      <Link
-        href={base}
-        className={`flex items-center gap-2 rounded-lg px-3 py-2 font-semibold ${
-          activeSlug === null ? "bg-brand text-brand-ink" : "hover:bg-surface-2"
-        }`}
-      >
-        <OverviewIcon />
-        {labels.overview}
-      </Link>
-      {tree.length > 0 && <div className="my-2 border-t border-line" />}
-      <Tree nodes={tree} base={base} lang={lang} stats={stats} activeSlug={activeSlug} isOpen={isOpen} toggle={toggle} />
-    </nav>
+  // Rendered twice (phone panel + desktop sidebar); each copy gets its own
+  // LayoutGroup so the sliding highlight doesn't jump between them.
+  const nav = (group: string) => (
+    <LayoutGroup id={group}>
+      <nav lang={lang} className="text-[0.95rem]">
+        <Link
+          href={base}
+          className={`relative flex items-center gap-2 rounded-lg px-3 py-2 font-semibold transition-colors ${
+            activeSlug === null ? "text-brand-ink" : "hover:bg-surface-2"
+          }`}
+        >
+          {activeSlug === null && <ActivePill solid />}
+          <LayoutDashboard className="relative size-4" strokeWidth={2.2} aria-hidden />
+          <span className="relative">{labels.overview}</span>
+        </Link>
+        {tree.length > 0 && <div className="my-2 border-t border-line" />}
+        <Tree nodes={tree} base={base} lang={lang} stats={stats} activeSlug={activeSlug} isOpen={isOpen} toggle={toggle} />
+      </nav>
+    </LayoutGroup>
   );
 
   return (
@@ -64,26 +72,43 @@ export function SubjectSidebar({ subjectSlug, subjectTitle, lang, tree, stats, l
             <span className="block text-xs font-medium uppercase tracking-wide text-muted">{labels.contents}</span>
             <span className="block truncate font-semibold">{activeTitle ?? labels.overview}</span>
           </span>
-          <Chevron open={mobileOpen} className="size-5" />
+          <Rotate open={mobileOpen}>
+            <ChevronRight className="size-5 text-muted" aria-hidden />
+          </Rotate>
         </button>
-        {mobileOpen && <div className="border-t border-line p-2">{nav}</div>}
+        <Collapse open={mobileOpen}>
+          <div className="border-t border-line p-2">{nav("mobile")}</div>
+        </Collapse>
       </div>
 
       {/* Desktop: sticky sidebar */}
       <div className="hidden lg:block sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto rounded-xl border border-line bg-surface p-2">
         <Link
           href="/#syllabus"
-          className="flex items-center gap-1 px-3 pt-1 text-xs text-muted hover:text-brand"
+          className="group inline-flex items-center gap-1 px-3 pt-1 text-xs text-muted hover:text-brand"
           lang={lang}
         >
-          <span aria-hidden>←</span> {labels.allSubjects}
+          <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" aria-hidden />
+          {labels.allSubjects}
         </Link>
         <p className="px-3 pt-2 pb-2 text-sm font-bold leading-snug" lang={lang}>
           {subjectTitle}
         </p>
-        {nav}
+        {nav("desktop")}
       </div>
     </aside>
+  );
+}
+
+/** The highlight behind the selected item; it slides to the new item on navigation. */
+function ActivePill({ solid }: { solid?: boolean }) {
+  return (
+    <motion.span
+      layoutId="active-pill"
+      transition={spring}
+      className={`absolute inset-0 rounded-lg ${solid ? "bg-brand" : "bg-brand-soft"}`}
+      aria-hidden
+    />
   );
 }
 
@@ -107,7 +132,7 @@ function Tree({
   depth?: number;
 }) {
   return (
-    <ul className={depth > 0 ? "ml-3 border-l border-line pl-2" : "space-y-0.5"}>
+    <ul className={depth > 0 ? "ml-3 mt-0.5 space-y-0.5 border-l border-line pl-2" : "space-y-0.5"}>
       {nodes.map((node) => {
         const hasChildren = node.children.length > 0;
         const open = hasChildren && isOpen(node.id);
@@ -116,17 +141,18 @@ function Tree({
         return (
           <li key={node.id}>
             <div
-              className={`flex items-center rounded-lg ${
-                active ? "bg-brand-soft text-brand font-semibold" : "hover:bg-surface-2"
+              className={`relative flex items-center rounded-lg transition-colors ${
+                active ? "text-brand font-semibold" : "hover:bg-surface-2"
               }`}
             >
+              {active && <ActivePill />}
               <Link
                 href={`${base}/${node.slug}`}
                 onClick={() => {
                   if (hasChildren && !open) toggle(node.id);
                 }}
                 aria-current={active ? "page" : undefined}
-                className="flex flex-1 min-w-0 items-center gap-2 px-3 py-1.5 leading-snug"
+                className="relative flex flex-1 min-w-0 items-center gap-2 px-3 py-1.5 leading-snug"
               >
                 <span className="min-w-0 flex-1">{node.title}</span>
                 <ContentCounts lang={lang} notes={totals.notes} questions={totals.questions} className="shrink-0" />
@@ -136,23 +162,27 @@ function Tree({
                   onClick={() => toggle(node.id)}
                   aria-expanded={open}
                   aria-label={node.title}
-                  className="shrink-0 grid place-items-center size-8 rounded-md text-muted hover:text-ink"
+                  className="relative shrink-0 grid place-items-center size-8 rounded-md text-muted hover:text-ink hover:bg-surface-2/80"
                 >
-                  <Chevron open={open} />
+                  <Rotate open={open}>
+                    <ChevronRight className="size-4" aria-hidden />
+                  </Rotate>
                 </button>
               )}
             </div>
-            {open && (
-              <Tree
-                nodes={node.children}
-                base={base}
-                lang={lang}
-                stats={stats}
-                activeSlug={activeSlug}
-                isOpen={isOpen}
-                toggle={toggle}
-                depth={depth + 1}
-              />
+            {hasChildren && (
+              <Collapse open={open}>
+                <Tree
+                  nodes={node.children}
+                  base={base}
+                  lang={lang}
+                  stats={stats}
+                  activeSlug={activeSlug}
+                  isOpen={isOpen}
+                  toggle={toggle}
+                  depth={depth + 1}
+                />
+              </Collapse>
             )}
           </li>
         );
@@ -190,25 +220,4 @@ function findTitle(nodes: TopicNode[], slug: string): string | null {
     if (sub) return sub;
   }
   return null;
-}
-
-function Chevron({ open, className = "size-4" }: { open: boolean; className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      aria-hidden
-      className={`${className} transition-transform ${open ? "rotate-90" : ""}`}
-    >
-      <path d="M7.2 4.2a1 1 0 0 1 1.4 0l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 1 1-1.4-1.4L11.5 10 7.2 5.6a1 1 0 0 1 0-1.4Z" />
-    </svg>
-  );
-}
-
-function OverviewIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden className="size-4">
-      <path d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4Zm0 6a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6Zm9-1a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-4Z" />
-    </svg>
-  );
 }

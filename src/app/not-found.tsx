@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { PressLink } from "@/components/motion";
 import { EmptyState } from "@/components/empty-state";
 
 export default function NotFound() {
@@ -9,9 +9,9 @@ export default function NotFound() {
         title="পেজটি পাওয়া যায়নি"
         body="লিংকটি ভুল হতে পারে, অথবা পেজটি সরিয়ে ফেলা হয়েছে।"
         action={
-          <Link href="/" className="rounded-lg bg-brand px-4 py-2 font-semibold text-brand-ink hover:opacity-90">
+          <PressLink href="/" className="rounded-lg bg-brand px-4 py-2 font-semibold text-brand-ink transition-opacity hover:opacity-90">
             সব বিষয় দেখুন
-          </Link>
+          </PressLink>
         }
       />
     </div>

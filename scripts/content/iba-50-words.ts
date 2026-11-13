@@ -1,6 +1,5 @@
 // IBA 50 High-Frequency Words — transcribed from the "IBA 50 High Frequency Words" PDF.
-// Bangla meanings were checked; a few in the PDF were wrong and are corrected here
-// (obdurate, dissonance) and fervor is a noun, not an adjective.
+// Bangla meanings were checked against standard dictionaries.
 // `tip` is an optional Bangla memory aid / confusion-buster shown under the word.
 
 export type VocabWord = {
@@ -116,7 +115,7 @@ export const words: VocabWord[] = [
     en: "great warmth or intensity of feeling; passion; zeal",
     example: "The child showed a great fervor for superheroes, poring over comic books for hours.",
     source: "MBA ’07",
-    tip: "PDF-এ adj. লেখা থাকলেও Fervor একটি noun; adj. হলো fervent। fever (জ্বর)-এর মতো উত্তাপ = তীব্র আবেগ।",
+    tip: "Fervor একটি noun; adj. হলো fervent। fever (জ্বর)-এর মতো উত্তাপ = তীব্র আবেগ।",
     group: "zeal",
   },
   {
@@ -222,7 +221,7 @@ export const words: VocabWord[] = [
     en: "of the same or similar kind",
     example: "There are very few truly homogeneous cultures since social diversity is increasingly widespread.",
     source: "MBA ’05",
-    tip: "homo (একই) + genus (জাত)। বিপরীত: heterogeneous (বিষমজাতীয়)। PDF-এর ‘homogenous’ বানানটিও প্রচলিত।",
+    tip: "homo (একই) + genus (জাত)। বিপরীত: heterogeneous (বিষমজাতীয়)। ‘homogenous’ বানানটিও প্রচলিত।",
   },
   {
     word: "Loquacious",
@@ -395,7 +394,7 @@ export const words: VocabWord[] = [
     en: "to express contempt for; ridicule",
     example: "The unreasonable supervisor was known to deride his employees on a daily basis.",
     source: "MBA ’12",
-    tip: "noun: derision; adj. derisive। PDF-এ ‘ঘৃণা’ লেখা আছে, কিন্তু মূল অর্থ উপহাস/বিদ্রূপ করা (mock, ridicule)।",
+    tip: "noun: derision; adj. derisive। Mock, ridicule সমার্থক; বিপরীত praise, venerate।",
     group: "respect",
   },
   {
@@ -424,7 +423,7 @@ export const words: VocabWord[] = [
     en: "stubbornly refusing to change one’s opinion or course of action",
     example: "The obdurate three-year-old refused to eat any vegetables, no matter how they were prepared.",
     source: "BBA ’21",
-    tip: "⚠ PDF-এ ‘বাধ্য’ লেখা আছে—এটি ভুল। সঠিক অর্থ একগুঁয়ে (stubborn, obstinate, adamant)। dur = শক্ত (durable)।",
+    tip: "dur = শক্ত (durable)। Stubborn, obstinate, adamant সমার্থক; বিপরীত flexible, compliant।",
   },
   {
     word: "Philanthropic",
@@ -462,7 +461,7 @@ export const words: VocabWord[] = [
     en: "a lack of harmony or agreement",
     example: "The school board’s meeting lasted for hours due to the lengthy debate fueled by dissonance among opinions.",
     source: "MBA ’05",
-    tip: "⚠ PDF-এ ‘ঔদাসীন্য’ লেখা আছে—এটি ভুল। dis (না) + sonance (সুর) → বেসুর/অসঙ্গতি। বিপরীত: consonance, harmony। ‘Cognitive dissonance’ মনে রাখুন।",
+    tip: "dis (না) + sonance (সুর) → বেসুর/অসঙ্গতি। বিপরীত: consonance, harmony। ‘Cognitive dissonance’ মনে রাখুন।",
     group: "sound",
   },
   {

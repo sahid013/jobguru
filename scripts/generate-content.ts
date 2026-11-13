@@ -31,7 +31,7 @@ function wordEntry(w: VocabWord, i: number) {
     "",
     `> ${w.example}`,
   ];
-  if (w.tip) lines.push("", `💡 ${w.tip}`);
+  if (w.tip) lines.push("", `**মনে রাখুন:** ${w.tip}`);
   return lines.join("\n");
 }
 
@@ -40,7 +40,7 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const noteBody = [
   `Each entry gives the part of speech, the Bangla meaning, a plain-English definition, an example sentence, and the IBA exam(s) where the word appeared.`,
   ``,
-  `প্রতিটি শব্দের নিচে 💡 চিহ্নে বাংলায় মনে রাখার কৌশল, বানানের ফাঁদ ও কাছাকাছি শব্দের পার্থক্য দেওয়া আছে। PDF-এর কয়েকটি বাংলা অর্থ ভুল ছিল (যেমন *obdurate*, *dissonance*)—এখানে সেগুলো সংশোধন করা হয়েছে।`,
+  `প্রতিটি শব্দের নিচে **মনে রাখুন** অংশে বাংলায় মনে রাখার কৌশল, বানানের ফাঁদ ও কাছাকাছি শব্দের পার্থক্য দেওয়া আছে।`,
   ``,
   `---`,
   ``,

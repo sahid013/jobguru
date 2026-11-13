@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -48,9 +49,10 @@ async function PracticeContent({ params }: Pick<Props, "params">) {
         <h1 className="text-2xl font-bold">{topic.title}</h1>
         <Link
           href={`/subjects/${subject.slug}/${topic.slug}`}
-          className="rounded-lg border border-line px-3 py-1.5 text-sm hover:bg-surface-2"
+          className="group inline-flex items-center gap-1.5 rounded-lg border border-line px-3 py-1.5 text-sm transition-colors hover:bg-surface-2"
         >
-          <span aria-hidden>←</span> {t(lang, "backToTopic")}
+          <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" aria-hidden />
+          {t(lang, "backToTopic")}
         </Link>
       </div>
       {questions.length === 0 ? (

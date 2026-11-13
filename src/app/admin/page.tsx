@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ExternalLink, Plus, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { buildTree } from "@/lib/data";
 import { getEditorClient } from "@/lib/auth";
@@ -41,10 +42,11 @@ export default async function AdminPage() {
         </p>
         <form action={refreshSite} className="shrink-0">
           <button
-            className="rounded-lg border border-line px-3 py-1.5 text-sm hover:bg-surface-2"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-line px-3 py-1.5 text-sm transition-colors hover:bg-surface-2"
             title="SQL Editor দিয়ে যোগ করা কন্টেন্ট সাথে সাথে সাইটে দেখাতে"
           >
-            ↻ সাইট রিফ্রেশ
+            <RefreshCw className="size-3.5" aria-hidden />
+            সাইট রিফ্রেশ
           </button>
         </form>
       </div>
@@ -54,8 +56,13 @@ export default async function AdminPage() {
           <section key={subject.id} className="rounded-xl border border-line bg-surface" lang={subject.lang}>
             <div className="flex items-center justify-between gap-3 px-5 py-3 border-b border-line">
               <h2 className="text-lg font-semibold">{subject.title}</h2>
-              <Link href={`/subjects/${subject.slug}`} className="text-sm text-brand hover:underline" lang="bn">
-                সাইটে দেখুন ↗
+              <Link
+                href={`/subjects/${subject.slug}`}
+                className="inline-flex items-center gap-1 text-sm text-brand hover:underline"
+                lang="bn"
+              >
+                সাইটে দেখুন
+                <ExternalLink className="size-3.5" aria-hidden />
               </Link>
             </div>
             <div className="px-5 py-3">
@@ -65,7 +72,10 @@ export default async function AdminPage() {
                 <TopicRows nodes={buildTree(subjectTopics)} counts={counts} />
               )}
               <details className="mt-3" lang="bn">
-                <summary className="cursor-pointer text-sm font-medium text-brand">+ নতুন টপিক যোগ করুন</summary>
+                <summary className="inline-flex cursor-pointer items-center gap-1 text-sm font-medium text-brand">
+                  <Plus className="size-4" aria-hidden />
+                  নতুন টপিক যোগ করুন
+                </summary>
                 <form action={createTopic} className="mt-3 grid gap-3 sm:grid-cols-2">
                   <input type="hidden" name="subject_id" value={subject.id} />
                   <Field label="টাইটেল *">

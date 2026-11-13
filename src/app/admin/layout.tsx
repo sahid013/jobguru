@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { Suspense } from "react";
 import { PageSkeleton } from "@/components/ui";
 import { getCurrentUser } from "@/lib/auth";
@@ -16,6 +17,8 @@ export default function AdminLayout({ children }: LayoutProps<"/admin">) {
 }
 
 async function AdminGate({ children }: { children: React.ReactNode }) {
+  // Per-user page: never prerender (Supabase auth reads the clock and cookies).
+  await connection();
   if (!isSupabaseConfigured) {
     return (
       <Notice title="Supabase যুক্ত করা হয়নি">

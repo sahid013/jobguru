@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { EmptyState } from "@/components/empty-state";
+import { PressLink } from "@/components/motion";
 import { TopicList } from "@/components/topic-list";
 import { Breadcrumbs, Callout, PageSkeleton } from "@/components/ui";
 import { buildTree, flattenTree, getSubject, getSubjects, getTopics, getTopicStats, sumStats } from "@/lib/data";
@@ -59,12 +61,13 @@ async function SubjectContent({ params }: Pick<PageProps<"/subjects/[subject]">,
                   : t(lang, "contentComing")}
               </p>
               {first && (
-                <Link
+                <PressLink
                   href={`/subjects/${subject.slug}/${first.slug}`}
-                  className="inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-brand-ink hover:opacity-90"
+                  className="group inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-brand-ink transition-opacity hover:opacity-90"
                 >
-                  {t(lang, "start")} <span aria-hidden>→</span>
-                </Link>
+                  {t(lang, "start")}
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                </PressLink>
               )}
             </div>
             <TopicList nodes={tree} lang={lang} subjectSlug={subject.slug} topics={topics} stats={stats} />
