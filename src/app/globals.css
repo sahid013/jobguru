@@ -1,26 +1,113 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --surface-2: #f0efe9;
+  --ink: #1b1f1d;
+  --muted: #5e6662;
+  --line: #e2e0d8;
+  --brand: #0f6b4f;
+  --brand-ink: #ffffff;
+  --brand-soft: #e3f1ea;
+  --accent: #c2410c;
+  --warn-bg: #fdf6e3;
+  --warn-ink: #7a5a0c;
+  --ok: #15803d;
+  --bad: #b91c1c;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #111513;
+    --surface: #181d1b;
+    --surface-2: #1f2522;
+    --ink: #e8ece9;
+    --muted: #9aa5a0;
+    --line: #2b3330;
+    --brand: #3fb68b;
+    --brand-ink: #0b1310;
+    --brand-soft: #173329;
+    --accent: #fb923c;
+    --warn-bg: #2a2412;
+    --warn-ink: #e9cf85;
+    --ok: #4ade80;
+    --bad: #f87171;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-accent: var(--accent);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-ink: var(--warn-ink);
+  --color-ok: var(--ok);
+  --color-bad: var(--bad);
+  /* Inter has no Bengali glyphs, so Bangla text falls through to Hind Siliguri. */
+  --font-sans: var(--font-inter), var(--font-bangla), system-ui, sans-serif;
 }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Bangla script needs a little more line height to keep matras and kars from clashing. */
+:lang(bn) {
+  line-height: 1.75;
+}
+
+/* Rendered Markdown notes */
+.prose-note {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+.prose-note h1, .prose-note h2, .prose-note h3 {
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 1.6em 0 0.6em;
+}
+.prose-note h1 { font-size: 1.5rem; }
+.prose-note h2 { font-size: 1.3rem; }
+.prose-note h3 { font-size: 1.125rem; }
+.prose-note p { margin: 0.8em 0; }
+.prose-note ul { list-style: disc; padding-left: 1.4em; margin: 0.8em 0; }
+.prose-note ol { list-style: decimal; padding-left: 1.4em; margin: 0.8em 0; }
+.prose-note li { margin: 0.3em 0; }
+.prose-note a { color: var(--brand); text-decoration: underline; }
+.prose-note strong { font-weight: 700; }
+.prose-note blockquote {
+  border-left: 3px solid var(--brand);
+  background: var(--brand-soft);
+  padding: 0.6em 1em;
+  margin: 1em 0;
+  border-radius: 0 6px 6px 0;
+}
+.prose-note code {
+  background: var(--surface-2);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.prose-note table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 0.95em;
+  display: block;
+  overflow-x: auto;
+}
+.prose-note th, .prose-note td {
+  border: 1px solid var(--line);
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+.prose-note th { background: var(--surface-2); font-weight: 600; }
