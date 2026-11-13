@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Quiz } from "@/components/quiz";
@@ -37,13 +38,21 @@ async function PracticeContent({ params }: Pick<Props, "params">) {
     <div lang={lang} className="max-w-3xl mx-auto">
       <Breadcrumbs
         items={[
-          { href: "/", label: "সিলেবাস", lang: "bn" },
+          { href: "/", label: "সব বিষয়", lang: "bn" },
           { href: `/subjects/${subject.slug}`, label: subject.title },
           { href: `/subjects/${subject.slug}/${topic.slug}`, label: topic.title },
           { label: t(lang, "practice") },
         ]}
       />
-      <h1 className="text-2xl font-bold mb-6">{topic.title}</h1>
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-2xl font-bold">{topic.title}</h1>
+        <Link
+          href={`/subjects/${subject.slug}/${topic.slug}`}
+          className="rounded-lg border border-line px-3 py-1.5 text-sm hover:bg-surface-2"
+        >
+          <span aria-hidden>←</span> {t(lang, "backToTopic")}
+        </Link>
+      </div>
       {questions.length === 0 ? (
         <p className="text-muted">{t(lang, "noQuestions")}</p>
       ) : (

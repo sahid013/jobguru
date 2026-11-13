@@ -85,6 +85,41 @@ export async function getQuestions(topicIds: string[]): Promise<Question[]> {
   return data as Question[];
 }
 
+export type TopicStats = Record<string, { notes: number; questions: number }>;
+
+/** Published note/question counts per topic, for "has content" hints across the site. */
+export async function getTopicStats(): Promise<TopicStats> {
+  "use cache";
+  cached();
+  if (!isSupabaseConfigured) return {};
+  const { data, error } = await createPublicClient()
+    .from("topic_content_counts")
+    .select("topic_id, notes, questions");
+  if (error) {
+    // The view comes from migrations/0002_topic_stats.sql; the site still works without it.
+    console.warn("topic_content_counts unavailable:", error.message);
+    return {};
+  }
+  return Object.fromEntries(
+    data.map((r) => [r.topic_id, { notes: Number(r.notes), questions: Number(r.questions) }]),
+  );
+}
+
+/** Totals for a set of topic ids (use with descendantIds to include sub-topics). */
+export function sumStats(ids: string[], stats: TopicStats) {
+  return ids.reduce(
+    (acc, id) => {
+      const s = stats[id];
+      if (s) {
+        acc.notes += s.notes;
+        acc.questions += s.questions;
+      }
+      return acc;
+    },
+    { notes: 0, questions: 0 },
+  );
+}
+
 export async function countQuestions(topicIds: string[]): Promise<number> {
   "use cache";
   cached();
@@ -113,6 +148,11 @@ export function buildTree(topics: Topic[]): TopicNode[] {
   };
   sort(roots);
   return roots;
+}
+
+/** Reading order: parents first, then their children — used for prev/next links. */
+export function flattenTree(nodes: TopicNode[]): TopicNode[] {
+  return nodes.flatMap((n) => [n, ...flattenTree(n.children)]);
 }
 
 /** A topic plus all of its descendants' ids — used to pool practice questions. */

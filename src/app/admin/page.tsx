@@ -3,7 +3,7 @@ import Link from "next/link";
 import { buildTree } from "@/lib/data";
 import { getEditorClient } from "@/lib/auth";
 import type { Subject, Topic, TopicNode } from "@/lib/types";
-import { createTopic } from "./actions";
+import { createTopic, refreshSite } from "./actions";
 import { Field, SubmitButton, inputClass } from "./form-ui";
 
 export const metadata: Metadata = { title: "কন্টেন্ট ড্যাশবোর্ড" };
@@ -35,9 +35,19 @@ export default async function AdminPage() {
 
   return (
     <div className="space-y-6">
-      <p className="text-muted">
-        একটি টপিক বেছে নিয়ে তাতে নোট ও MCQ যোগ করুন। নতুন টপিক বা উপ-টপিকও এখান থেকে যোগ করা যাবে।
-      </p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <p className="text-muted">
+          একটি টপিক বেছে নিয়ে তাতে নোট ও MCQ যোগ করুন। নতুন টপিক বা উপ-টপিকও এখান থেকে যোগ করা যাবে।
+        </p>
+        <form action={refreshSite} className="shrink-0">
+          <button
+            className="rounded-lg border border-line px-3 py-1.5 text-sm hover:bg-surface-2"
+            title="SQL Editor দিয়ে যোগ করা কন্টেন্ট সাথে সাথে সাইটে দেখাতে"
+          >
+            ↻ সাইট রিফ্রেশ
+          </button>
+        </form>
+      </div>
       {(subjects as Subject[]).map((subject) => {
         const subjectTopics = (topics as Topic[]).filter((t) => t.subject_id === subject.id);
         return (

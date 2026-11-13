@@ -142,6 +142,12 @@ export async function deleteQuestion(form: FormData) {
   refreshPublic();
 }
 
+/** For content added outside the dashboard (SQL Editor, imports): make it visible now. */
+export async function refreshSite() {
+  await requireEditor();
+  refreshPublic();
+}
+
 // ───────────────────────── Session ─────────────────────────
 
 export async function signOut() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { num, t } from "@/lib/i18n";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/client";
@@ -10,6 +10,9 @@ const OPTION_LABELS: Record<Lang, string[]> = {
   bn: ["ক", "খ", "গ", "ঘ", "ঙ", "চ"],
   en: ["A", "B", "C", "D", "E", "F"],
 };
+const BN_KEYS = "০১২৩৪৫৬৭৮৯";
+
+type Answer = { question: Question; selected: number };
 
 function shuffle<T>(items: T[]): T[] {
   const a = [...items];
@@ -26,18 +29,18 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
   const [order, setOrder] = useState(questions);
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
-  const [score, setScore] = useState(0);
+  const [answers, setAnswers] = useState<Answer[]>([]);
 
   const done = index >= order.length;
   const q = order[index];
   const answered = selected !== null;
+  const isLast = index === order.length - 1;
 
   function choose(i: number) {
-    if (answered) return;
+    if (answered || done) return;
     setSelected(i);
-    const correct = i === q.correct_index;
-    if (correct) setScore((s) => s + 1);
-    void recordAttempt(q.id, i, correct);
+    setAnswers((a) => [...a, { question: q, selected: i }]);
+    void recordAttempt(q.id, i, i === q.correct_index);
   }
 
   function next() {
@@ -45,26 +48,98 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
     setIndex((i) => i + 1);
   }
 
-  function restart() {
-    setOrder(shuffle(questions));
+  function start(list: Question[]) {
+    setOrder(shuffle(list));
     setIndex(0);
     setSelected(null);
-    setScore(0);
+    setAnswers([]);
   }
 
+  // Keyboard: 1–6 (or ১–৬) picks an option, Enter / → moves on.
+  useEffect(() => {
+    if (done) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const digit = /^[1-6]$/.test(e.key) ? Number(e.key) : BN_KEYS.indexOf(e.key);
+      if (digit >= 1 && digit <= q.options.length && !answered) {
+        e.preventDefault();
+        choose(digit - 1);
+      } else if ((e.key === "Enter" || e.key === "ArrowRight") && answered) {
+        e.preventDefault();
+        next();
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done, answered, q]);
+
   if (done) {
+    const wrong = answers.filter((a) => a.selected !== a.question.correct_index);
+    const score = answers.length - wrong.length;
+    const pct = answers.length ? Math.round((score / answers.length) * 100) : 0;
     return (
-      <div className="rounded-xl border border-line bg-surface p-8 text-center">
-        <p className="text-muted">{t(lang, "score")}</p>
-        <p className="mt-2 text-5xl font-bold text-brand tabular-nums">
-          {num(lang, score)} / {num(lang, order.length)}
-        </p>
-        <button
-          onClick={restart}
-          className="mt-6 rounded-lg bg-brand text-brand-ink px-5 py-2.5 font-semibold hover:opacity-90"
-        >
-          {t(lang, "restart")}
-        </button>
+      <div className="space-y-6">
+        <div className="rounded-xl border border-line bg-surface p-8 text-center">
+          <p className="text-muted">{t(lang, "score")}</p>
+          <p className="mt-2 text-5xl font-bold text-brand tabular-nums">
+            {num(lang, score)} / {num(lang, answers.length)}
+          </p>
+          <div className="mx-auto mt-4 h-2 max-w-xs overflow-hidden rounded-full bg-surface-2">
+            <div className="h-full bg-brand" style={{ width: `${pct}%` }} />
+          </div>
+          <p className="mt-2 text-sm text-muted tabular-nums">{num(lang, pct)}%</p>
+          {wrong.length === 0 && <p className="mt-4 font-semibold text-ok">{t(lang, "allCorrect")}</p>}
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            {wrong.length > 0 && (
+              <button
+                onClick={() => start(wrong.map((w) => w.question))}
+                className="rounded-lg bg-brand px-5 py-2.5 font-semibold text-brand-ink hover:opacity-90"
+              >
+                {t(lang, "retryWrong")} ({num(lang, wrong.length)})
+              </button>
+            )}
+            <button
+              onClick={() => start(questions)}
+              className={`rounded-lg px-5 py-2.5 font-semibold ${
+                wrong.length > 0 ? "border border-line hover:bg-surface-2" : "bg-brand text-brand-ink hover:opacity-90"
+              }`}
+            >
+              {t(lang, "restart")}
+            </button>
+          </div>
+        </div>
+
+        {wrong.length > 0 && (
+          <section>
+            <h2 className="mb-3 text-lg font-semibold">{t(lang, "reviewWrong")}</h2>
+            <ol className="space-y-3">
+              {wrong.map(({ question, selected }, i) => (
+                <li key={question.id} className="rounded-xl border border-line bg-surface p-5">
+                  <p className="font-semibold">
+                    {num(lang, i + 1)}. {question.stem}
+                  </p>
+                  <dl className="mt-3 space-y-1.5 text-sm">
+                    <div className="flex gap-2">
+                      <dt className="shrink-0 text-bad">✗ {t(lang, "yourAnswer")}:</dt>
+                      <dd className="text-bad">{question.options[selected]}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="shrink-0 font-semibold text-ok">✓ {t(lang, "correctAnswer")}:</dt>
+                      <dd className="font-semibold text-ok">{question.options[question.correct_index]}</dd>
+                    </div>
+                  </dl>
+                  {question.explanation && (
+                    <p className="mt-3 rounded-lg bg-surface-2 px-3 py-2 text-sm">
+                      <span className="font-semibold text-muted">{t(lang, "explanation")}: </span>
+                      {question.explanation}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
       </div>
     );
   }
@@ -108,14 +183,24 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
                   {OPTION_LABELS[lang][i]}
                 </span>
                 <span className="pt-0.5">{opt}</span>
+                {answered && isCorrect && (
+                  <span className="ml-auto pt-0.5 font-semibold text-ok" aria-hidden>
+                    ✓
+                  </span>
+                )}
+                {answered && isChosen && !isCorrect && (
+                  <span className="ml-auto pt-0.5 font-semibold text-bad" aria-hidden>
+                    ✗
+                  </span>
+                )}
               </button>
             </li>
           );
         })}
       </ol>
 
-      {answered && (
-        <div className="mt-5 space-y-4">
+      {answered ? (
+        <div className="mt-5 space-y-4" aria-live="polite">
           <p className={`font-semibold ${selected === q.correct_index ? "text-ok" : "text-bad"}`}>
             {selected === q.correct_index ? t(lang, "correct") : t(lang, "wrong")}
           </p>
@@ -127,11 +212,14 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
           )}
           <button
             onClick={next}
+            autoFocus
             className="rounded-lg bg-brand text-brand-ink px-5 py-2.5 font-semibold hover:opacity-90"
           >
-            {t(lang, "next")} →
+            {isLast ? t(lang, "finish") : t(lang, "next")} <span aria-hidden>→</span>
           </button>
         </div>
+      ) : (
+        <p className="mt-5 hidden text-xs text-muted sm:block">{t(lang, "keyboardHint")}</p>
       )}
     </div>
   );

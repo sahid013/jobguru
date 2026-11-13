@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="bn" className={`${inter.variable} ${bangla.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
         <SiteHeader />
-        <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 py-8">{children}</main>
+        <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 py-8">{children}</main>
         <footer className="border-t border-line py-6 text-center text-sm text-muted">
           জব গুরু · প্রস্তুতি চলুক নিয়মিত
         </footer>

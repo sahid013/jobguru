@@ -20,7 +20,7 @@ Before Supabase is connected, the site serves the bundled syllabus in `src/data/
    NEXT_PUBLIC_SUPABASE_URL=https://oaavfexootopaigidlnn.supabase.co
    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<your key>
    ```
-2. **Schema.** Run `supabase/migrations/0001_init.sql` in the SQL Editor.
+2. **Schema.** Run `supabase/migrations/0001_init.sql`, then `0002_topic_stats.sql`, in the SQL Editor.
 3. **Syllabus.** Run `supabase/seed.sql` in the SQL Editor.
 4. **Your account.** Restart `npm run dev`, open `/login` and create an account. Then make yourself an admin (the `/admin` page shows this SQL with your id filled in):
    ```sql
@@ -36,6 +36,16 @@ Go to **/admin** (the “কন্টেন্ট যোগ” link in the heade
 - **MCQs**: 2–4 options, the correct answer, an explanation and a source (e.g. ৪৫তম বিসিএস).
 
 Changes appear on the public site immediately.
+
+### Bulk content from files
+
+Larger content sets live as data in `scripts/content/` and are turned into SQL:
+
+```bash
+npm run content:sql     # → supabase/content/iba-50-words.sql
+```
+
+Run the generated file in the SQL Editor, then press **↻ সাইট রিফ্রেশ** on `/admin` so cached pages pick it up immediately. The scripts are re-runnable; they replace what they created before.
 
 ## Structure
 
