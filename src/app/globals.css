@@ -122,3 +122,21 @@ body {
 html {
   scroll-behavior: smooth;
 }
+/* Notes jump between a word list and its entries — do it instantly. */
+html:has(.prose-note) {
+  scroll-behavior: auto;
+}
+
+/* "Back to the word list" link, pinned to the bottom-right corner of the screen. */
+.back-to-list {
+  position: fixed;
+  z-index: 30;
+  bottom: 1rem;
+  right: 1rem;
+}
+@media (min-width: 40rem) {
+  .back-to-list {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}

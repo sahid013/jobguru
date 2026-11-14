@@ -39,7 +39,6 @@ function wordEntry(w: VocabWord, i: number) {
     `> ${w.example}`,
   ];
   if (w.tip) lines.push("", `**মনে রাখুন:** ${w.tip}`);
-  lines.push("", `[↑ শব্দতালিকায় ফিরুন](#${slugify(LIST_HEADING)})`);
   return lines.join("\n");
 }
 

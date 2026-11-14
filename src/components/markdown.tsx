@@ -1,6 +1,7 @@
 import { Children, isValidElement, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { BackToList } from "./back-to-list";
 
 function textOf(node: ReactNode): string {
   if (typeof node === "string" || typeof node === "number") return String(node);
@@ -23,11 +24,14 @@ const components: Components = {
 };
 
 export function Markdown({ children }: { children: string }) {
+  // A "## Practice: …" heading marks a self-test word list; give it a floating way back.
+  const practice = children.match(/^## (Practice:.*)$/m)?.[1];
   return (
     <div className="prose-note">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {children}
       </ReactMarkdown>
+      {practice && <BackToList targetId={slugify(practice)} label="শব্দতালিকায় ফিরুন" />}
     </div>
   );
 }
