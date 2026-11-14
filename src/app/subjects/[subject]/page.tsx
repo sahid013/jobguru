@@ -7,13 +7,8 @@ import { EmptyState } from "@/components/empty-state";
 import { PressLink } from "@/components/motion";
 import { TopicList } from "@/components/topic-list";
 import { Breadcrumbs, Callout, PageSkeleton } from "@/components/ui";
-import { buildTree, flattenTree, getSubject, getSubjects, getTopics, getTopicStats, sumStats } from "@/lib/data";
+import { buildTree, flattenTree, getSubject, getTopics, getTopicStats, sumStats } from "@/lib/data";
 import { countLabel, num, t } from "@/lib/i18n";
-
-export async function generateStaticParams() {
-  const subjects = await getSubjects();
-  return subjects.map((s) => ({ subject: s.slug }));
-}
 
 export async function generateMetadata({ params }: PageProps<"/subjects/[subject]">): Promise<Metadata> {
   const subject = await getSubject((await params).subject);

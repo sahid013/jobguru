@@ -16,22 +16,11 @@ import {
   flattenTree,
   getNotes,
   getSubject,
-  getSubjects,
   getTopics,
   getTopicStats,
   sumStats,
 } from "@/lib/data";
 import { countLabel, t } from "@/lib/i18n";
-
-export async function generateStaticParams() {
-  const subjects = await getSubjects();
-  const all = await Promise.all(
-    subjects.map(async (s) =>
-      (await getTopics(s.id)).map((topic) => ({ subject: s.slug, topic: topic.slug })),
-    ),
-  );
-  return all.flat();
-}
 
 type Props = PageProps<"/subjects/[subject]/[topic]">;
 

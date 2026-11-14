@@ -60,7 +60,7 @@ export const words: VocabWord[] = [
     en: "to cause something to happen quickly or suddenly",
     example: "The bank’s collapse precipitated a financial crisis across the whole region.",
     source: "MBA ’11",
-    tip: "রসায়নের precipitate (অধঃক্ষেপ) নয়—এখানে verb: হঠাৎ কিছু ঘটিয়ে দেওয়া। adj. হিসেবে অর্থ ‘হঠকারী’।",
+    tip: "precipitation (বৃষ্টি) মনে করুন—আকাশ থেকে হঠাৎ ঝরে পড়ে। তেমনি precipitate = হঠাৎ কিছু ঘটিয়ে দেওয়া। কাছাকাছি: trigger, spark off। adj. হিসেবে অর্থ ‘হঠকারী’।",
   },
   {
     word: "Assuage",
@@ -69,7 +69,7 @@ export const words: VocabWord[] = [
     en: "to make an unpleasant feeling less intense",
     example: "A massage can assuage the soreness in your muscles.",
     source: "MBA ’11, ’13",
-    tip: "Assuage (অনুভূতি/ব্যথা কমানো), Placate (রাগী মানুষকে শান্ত করা), Mitigate (ক্ষতি বা তীব্রতা কমানো)—তিনটাই ‘কমানো’, কিন্তু object আলাদা।",
+    tip: "as (প্রতি) + suave (মিষ্টি, কোমল) → কষ্টকে মিষ্টি করে দেওয়া → ব্যথা বা দুঃখ কমানো। suave (মিষ্টভাষী)-এর সাথে মিলিয়ে মনে রাখুন। কাছাকাছি শব্দ: Assuage (অনুভূতি/ব্যথা কমানো), Placate (রাগী মানুষকে শান্ত করা), Mitigate (ক্ষতি বা তীব্রতা কমানো)—তিনটাই ‘কমানো’, কিন্তু object আলাদা।",
     group: "soothe",
   },
   {
@@ -79,6 +79,7 @@ export const words: VocabWord[] = [
     en: "having or showing great knowledge",
     example: "High school students often struggle with novels that are more erudite than they are entertaining.",
     source: "MBA ’13",
+    tip: "rude (অমার্জিত, অশিক্ষিত)-এর উল্টো ভাবুন: e-rude-ite = যে rude অবস্থা থেকে বেরিয়ে এসেছে → পণ্ডিত। কাছাকাছি: learned, scholarly। noun: erudition (পাণ্ডিত্য)।",
   },
   {
     word: "Opaque",
@@ -87,7 +88,7 @@ export const words: VocabWord[] = [
     en: "not able to be seen through; not easily understood",
     example: "Medical jargon includes many opaque terms that mean little to ordinary patients.",
     source: "MBA ’23",
-    tip: "transparent (স্বচ্ছ) → translucent (ঈষৎ স্বচ্ছ) → opaque (অস্বচ্ছ)।",
+    tip: "transparent (স্বচ্ছ) → translucent (ঈষৎ স্বচ্ছ) → opaque (অস্বচ্ছ)। রূপক অর্থে opaque = দুর্বোধ্য; বিপরীত: clear, lucid।",
     group: "unclear",
   },
   {
@@ -106,7 +107,7 @@ export const words: VocabWord[] = [
     en: "a person or thing that is mysterious, puzzling, or difficult to understand",
     example: "Scientists continue to research cancer to solve the enigma of its primary cause.",
     source: "MBA ’11",
-    tip: "adj. enigmatic = রহস্যময়। Mona Lisa-র ‘enigmatic smile’।",
+    tip: "adj. enigmatic = রহস্যময়। Mona Lisa-র ‘enigmatic smile’। কাছাকাছি: mystery, puzzle, riddle।",
   },
   {
     word: "Fervor",
@@ -115,7 +116,7 @@ export const words: VocabWord[] = [
     en: "great warmth or intensity of feeling; passion; zeal",
     example: "The child showed a great fervor for superheroes, poring over comic books for hours.",
     source: "MBA ’07",
-    tip: "Fervor একটি noun; adj. হলো fervent। fever (জ্বর)-এর মতো উত্তাপ = তীব্র আবেগ।",
+    tip: "Fervor একটি noun; adj. হলো fervent। fever (জ্বর)-এর মতো উত্তাপ = তীব্র আবেগ। কাছাকাছি: zeal, passion, enthusiasm।",
     group: "zeal",
   },
   {
@@ -125,7 +126,7 @@ export const words: VocabWord[] = [
     en: "to make someone less angry or hostile",
     example: "A parent may decide to placate a crying baby with a pacifier.",
     source: "MBA ’11",
-    tip: "Placate-এর object সবসময় মানুষ (রাগী কাউকে ঠান্ডা করা)। Pacify, appease কাছাকাছি।",
+    tip: "placebo (রোগীকে খুশি রাখার ভুয়া ওষুধ)-এর সাথে মিলিয়ে মনে রাখুন। Placate-এর object সবসময় মানুষ (রাগী কাউকে ঠান্ডা করা)। Pacify, appease কাছাকাছি।",
     group: "soothe",
   },
   {
@@ -135,7 +136,7 @@ export const words: VocabWord[] = [
     en: "strong enthusiasm and determination to do something",
     example: "The great emperor’s crusading zeal led him to conquer many lands.",
     source: "MBA ’14",
-    tip: "zealous (adj.) = উদ্যমী; zealot = গোঁড়া/অন্ধ সমর্থক।",
+    tip: "zealous (adj.) = উদ্যমী; zealot = গোঁড়া/অন্ধ সমর্থক। কাছাকাছি: fervor, enthusiasm, passion।",
     group: "zeal",
   },
   {
@@ -279,7 +280,7 @@ export const words: VocabWord[] = [
     en: "lasting for a very short time",
     example: "An ephemeral moment of victory may last mere seconds, but it can remain as a triumphant memory for decades.",
     source: "MBA ’23",
-    tip: "Transient, fleeting, short-lived সমার্থক। বিপরীত: permanent, eternal।",
+    tip: "এক দিনের মতো টেকে—ক্ষণিকের। Transient, fleeting, short-lived সমার্থক। বিপরীত: permanent, eternal।",
   },
   {
     word: "Laconic",
@@ -326,7 +327,7 @@ export const words: VocabWord[] = [
     en: "a harsh, unpleasant mixture of sounds",
     example: "The cacophony of the middle school band warming up was nearly unbearable for the audience.",
     source: "MBA ’24",
-    tip: "caco (খারাপ) + phony (শব্দ)। বিপরীত: euphony (শ্রুতিমধুর ধ্বনি)।",
+    tip: "caco (খারাপ) + phony (শব্দ)। telephone, symphony-র phone/phony = শব্দ। বিপরীত: euphony (শ্রুতিমধুর ধ্বনি)।",
     group: "sound",
   },
   {
@@ -336,7 +337,7 @@ export const words: VocabWord[] = [
     en: "to cause someone to feel drained of energy; weaken",
     example: "The boxer used a swift left uppercut to the jaw to enervate his opponent.",
     source: "BBA ’21",
-    tip: "⚠ সবচেয়ে বড় ফাঁদ: Enervate শুনতে energize-এর মতো, কিন্তু অর্থ উল্টো—দুর্বল করা। Invigorate = চাঙ্গা করা।",
+    tip: "e (বাইরে) + nerve (শক্তি) → nerve বের করে নেওয়া → দুর্বল করা। ⚠ শুনতে energize-এর মতো, কিন্তু অর্থ উল্টো। Invigorate = চাঙ্গা করা।",
     group: "tired",
   },
   {
@@ -356,7 +357,7 @@ export const words: VocabWord[] = [
     en: "a moment of sudden and great revelation or realization",
     example: "Seeing her father again when she was an adult was an epiphany that changed her whole view of her childhood.",
     source: "BBA ’19",
-    tip: "হঠাৎ ‘ইউরেকা!’ মুহূর্ত।",
+    tip: "হঠাৎ মাথায় বাতি জ্বলে ওঠা—‘ইউরেকা!’ মুহূর্ত। কাছাকাছি: realization, revelation, insight।",
   },
   {
     word: "Paradox",
@@ -394,7 +395,7 @@ export const words: VocabWord[] = [
     en: "to express contempt for; ridicule",
     example: "The unreasonable supervisor was known to deride his employees on a daily basis.",
     source: "MBA ’12",
-    tip: "noun: derision; adj. derisive। Mock, ridicule সমার্থক; বিপরীত praise, venerate।",
+    tip: "ridiculous (হাস্যকর)-এর rid লুকিয়ে আছে → কাউকে নিয়ে হাসাহাসি করা। noun: derision। Mock, ridicule সমার্থক; বিপরীত praise, venerate।",
     group: "respect",
   },
   {
@@ -441,7 +442,7 @@ export const words: VocabWord[] = [
     en: "to go back and forth between choices or opinions; be indecisive",
     example: "Some citizens vote solely along party lines and never waver in their political decisions.",
     source: "BBA ’09, MBA ’11",
-    tip: "Waver (দ্বিধা করা) ≠ Waiver (মওকুফ, ছাড়পত্র)—বানান ও অর্থ দুটোই আলাদা।",
+    tip: "wave (ঢেউ)-এর মতো এদিক-ওদিক দোলা → দ্বিধা করা। ⚠ Waver (দ্বিধা করা) ≠ Waiver (মওকুফ, ছাড়পত্র)—বানান ও অর্থ দুটোই আলাদা।",
     group: "waver",
   },
   {
@@ -481,7 +482,7 @@ export const words: VocabWord[] = [
     en: "easily bent or shaped; easily influenced; malleable",
     example: "Children’s moods are often pliable since children are greatly affected by their surroundings.",
     source: "BBA ’19",
-    tip: "ply = ভাঁজ করা। আক্ষরিক অর্থে সহজে বাঁকে (pliable wire), রূপক অর্থে সহজে প্রভাবিত হয়। Malleable, flexible সমার্থক।",
+    tip: "ply = ভাঁজ করা (plywood, pliers)। আক্ষরিক অর্থে সহজে বাঁকে (pliable wire), রূপক অর্থে সহজে প্রভাবিত হয়। Malleable, flexible সমার্থক।",
   },
   {
     word: "Ostentation",
@@ -490,7 +491,7 @@ export const words: VocabWord[] = [
     en: "a pretentious or showy display, especially of wealth",
     example: "Owning a mansion doesn’t imply ostentation, but traveling exclusively by private jet certainly can.",
     source: "—",
-    tip: "adj. ostentatious = লোকদেখানো। ‘Flaunt’ (verb) কাছাকাছি।",
+    tip: "সোজা কথায় show-off। adj. ostentatious = লোকদেখানো। ‘Flaunt’ (verb) কাছাকাছি।",
   },
   {
     word: "Prevaricate",

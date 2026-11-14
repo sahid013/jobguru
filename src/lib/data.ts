@@ -1,27 +1,23 @@
 import "server-only";
-import { cacheLife, cacheTag } from "next/cache";
+import { connection } from "next/server";
+import { cache } from "react";
 import { syllabus, type SeedTopic } from "@/data/syllabus";
 import { isSupabaseConfigured } from "./supabase/config";
 import { createPublicClient } from "./supabase/public";
 import type { Note, Question, Subject, Topic, TopicNode } from "./types";
 
-// All public reads go through this module. Every read is cached under the
-// "content" tag; admin Server Actions call updateTag("content") after a change.
+// All public reads go through this module. Every read hits Supabase at request time
+// (React cache() only dedupes calls within one request), so edits made straight in
+// Supabase show up on the next page load — no refresh step needed.
 // When Supabase isn't configured yet, it serves the bundled syllabus instead.
 
 export const CONTENT_TAG = "content";
 
-function cached() {
-  cacheLife("hours");
-  cacheTag(CONTENT_TAG);
-}
-
 const SUBJECT_COLS = "id, slug, lang, title, marks, sort_order, sources, source_note";
 const TOPIC_COLS = "id, subject_id, parent_id, slug, title, description, points, marks, sort_order";
 
-export async function getSubjects(): Promise<Subject[]> {
-  "use cache";
-  cached();
+export const getSubjects = cache(async (): Promise<Subject[]> => {
+  await connection();
   if (!isSupabaseConfigured) return local.subjects;
   const { data, error } = await createPublicClient()
     .from("subjects")
@@ -29,11 +25,10 @@ export async function getSubjects(): Promise<Subject[]> {
     .order("sort_order");
   if (error) throw error;
   return data as Subject[];
-}
+});
 
-export async function getSubject(slug: string): Promise<Subject | null> {
-  "use cache";
-  cached();
+export const getSubject = cache(async (slug: string): Promise<Subject | null> => {
+  await connection();
   if (!isSupabaseConfigured) return local.subjects.find((s) => s.slug === slug) ?? null;
   const { data, error } = await createPublicClient()
     .from("subjects")
@@ -42,11 +37,10 @@ export async function getSubject(slug: string): Promise<Subject | null> {
     .maybeSingle();
   if (error) throw error;
   return data as Subject | null;
-}
+});
 
-export async function getTopics(subjectId: string): Promise<Topic[]> {
-  "use cache";
-  cached();
+export const getTopics = cache(async (subjectId: string): Promise<Topic[]> => {
+  await connection();
   if (!isSupabaseConfigured) return local.topics.filter((t) => t.subject_id === subjectId);
   const { data, error } = await createPublicClient()
     .from("topics")
@@ -55,11 +49,10 @@ export async function getTopics(subjectId: string): Promise<Topic[]> {
     .order("sort_order");
   if (error) throw error;
   return data as Topic[];
-}
+});
 
-export async function getNotes(topicId: string): Promise<Note[]> {
-  "use cache";
-  cached();
+export const getNotes = cache(async (topicId: string): Promise<Note[]> => {
+  await connection();
   if (!isSupabaseConfigured) return [];
   const { data, error } = await createPublicClient()
     .from("notes")
@@ -69,11 +62,10 @@ export async function getNotes(topicId: string): Promise<Note[]> {
     .order("sort_order");
   if (error) throw error;
   return data as Note[];
-}
+});
 
-export async function getQuestions(topicIds: string[]): Promise<Question[]> {
-  "use cache";
-  cached();
+export const getQuestions = cache(async (topicIds: string[]): Promise<Question[]> => {
+  await connection();
   if (!isSupabaseConfigured || topicIds.length === 0) return [];
   const { data, error } = await createPublicClient()
     .from("questions")
@@ -83,14 +75,13 @@ export async function getQuestions(topicIds: string[]): Promise<Question[]> {
     .order("created_at");
   if (error) throw error;
   return data as Question[];
-}
+});
 
 export type TopicStats = Record<string, { notes: number; questions: number }>;
 
 /** Published note/question counts per topic, for "has content" hints across the site. */
-export async function getTopicStats(): Promise<TopicStats> {
-  "use cache";
-  cached();
+export const getTopicStats = cache(async (): Promise<TopicStats> => {
+  await connection();
   if (!isSupabaseConfigured) return {};
   const { data, error } = await createPublicClient()
     .from("topic_content_counts")
@@ -103,7 +94,7 @@ export async function getTopicStats(): Promise<TopicStats> {
   return Object.fromEntries(
     data.map((r) => [r.topic_id, { notes: Number(r.notes), questions: Number(r.questions) }]),
   );
-}
+});
 
 /** Totals for a set of topic ids (use with descendantIds to include sub-topics). */
 export function sumStats(ids: string[], stats: TopicStats) {
@@ -120,9 +111,8 @@ export function sumStats(ids: string[], stats: TopicStats) {
   );
 }
 
-export async function countQuestions(topicIds: string[]): Promise<number> {
-  "use cache";
-  cached();
+export const countQuestions = cache(async (topicIds: string[]): Promise<number> => {
+  await connection();
   if (!isSupabaseConfigured || topicIds.length === 0) return 0;
   const { count, error } = await createPublicClient()
     .from("questions")
@@ -131,7 +121,7 @@ export async function countQuestions(topicIds: string[]): Promise<number> {
     .eq("published", true);
   if (error) throw error;
   return count ?? 0;
-}
+});
 
 // ───────────────────────── Tree helpers ─────────────────────────
 

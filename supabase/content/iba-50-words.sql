@@ -55,7 +55,7 @@ To cause something to happen quickly or suddenly.
 
 > The bank’s collapse precipitated a financial crisis across the whole region.
 
-**মনে রাখুন:** রসায়নের precipitate (অধঃক্ষেপ) নয়—এখানে verb: হঠাৎ কিছু ঘটিয়ে দেওয়া। adj. হিসেবে অর্থ ‘হঠকারী’।
+**মনে রাখুন:** precipitation (বৃষ্টি) মনে করুন—আকাশ থেকে হঠাৎ ঝরে পড়ে। তেমনি precipitate = হঠাৎ কিছু ঘটিয়ে দেওয়া। কাছাকাছি: trigger, spark off। adj. হিসেবে অর্থ ‘হঠকারী’।
 
 ### 5. Assuage
 *verb* — **প্রশমিত করা, উপশম করা** · IBA MBA ’11, ’13
@@ -64,7 +64,7 @@ To make an unpleasant feeling less intense.
 
 > A massage can assuage the soreness in your muscles.
 
-**মনে রাখুন:** Assuage (অনুভূতি/ব্যথা কমানো), Placate (রাগী মানুষকে শান্ত করা), Mitigate (ক্ষতি বা তীব্রতা কমানো)—তিনটাই ‘কমানো’, কিন্তু object আলাদা।
+**মনে রাখুন:** as (প্রতি) + suave (মিষ্টি, কোমল) → কষ্টকে মিষ্টি করে দেওয়া → ব্যথা বা দুঃখ কমানো। suave (মিষ্টভাষী)-এর সাথে মিলিয়ে মনে রাখুন। কাছাকাছি শব্দ: Assuage (অনুভূতি/ব্যথা কমানো), Placate (রাগী মানুষকে শান্ত করা), Mitigate (ক্ষতি বা তীব্রতা কমানো)—তিনটাই ‘কমানো’, কিন্তু object আলাদা।
 
 ### 6. Erudite
 *adj.* — **পণ্ডিত, জ্ঞানী** · IBA MBA ’13
@@ -73,6 +73,8 @@ Having or showing great knowledge.
 
 > High school students often struggle with novels that are more erudite than they are entertaining.
 
+**মনে রাখুন:** rude (অমার্জিত, অশিক্ষিত)-এর উল্টো ভাবুন: e-rude-ite = যে rude অবস্থা থেকে বেরিয়ে এসেছে → পণ্ডিত। কাছাকাছি: learned, scholarly। noun: erudition (পাণ্ডিত্য)।
+
 ### 7. Opaque
 *adj.* — **অস্বচ্ছ; দুর্বোধ্য** · IBA MBA ’23
 
@@ -80,7 +82,7 @@ Not able to be seen through; not easily understood.
 
 > Medical jargon includes many opaque terms that mean little to ordinary patients.
 
-**মনে রাখুন:** transparent (স্বচ্ছ) → translucent (ঈষৎ স্বচ্ছ) → opaque (অস্বচ্ছ)।
+**মনে রাখুন:** transparent (স্বচ্ছ) → translucent (ঈষৎ স্বচ্ছ) → opaque (অস্বচ্ছ)। রূপক অর্থে opaque = দুর্বোধ্য; বিপরীত: clear, lucid।
 
 ### 8. Prodigal
 *adj.* — **অমিতব্যয়ী, অপব্যয়ী** · IBA MBA ’21
@@ -98,7 +100,7 @@ A person or thing that is mysterious, puzzling, or difficult to understand.
 
 > Scientists continue to research cancer to solve the enigma of its primary cause.
 
-**মনে রাখুন:** adj. enigmatic = রহস্যময়। Mona Lisa-র ‘enigmatic smile’।
+**মনে রাখুন:** adj. enigmatic = রহস্যময়। Mona Lisa-র ‘enigmatic smile’। কাছাকাছি: mystery, puzzle, riddle।
 
 ### 10. Fervor
 *noun* — **তীব্র আবেগ, প্রবল উৎসাহ** · IBA MBA ’07
@@ -107,7 +109,7 @@ Great warmth or intensity of feeling; passion; zeal.
 
 > The child showed a great fervor for superheroes, poring over comic books for hours.
 
-**মনে রাখুন:** Fervor একটি noun; adj. হলো fervent। fever (জ্বর)-এর মতো উত্তাপ = তীব্র আবেগ।
+**মনে রাখুন:** Fervor একটি noun; adj. হলো fervent। fever (জ্বর)-এর মতো উত্তাপ = তীব্র আবেগ। কাছাকাছি: zeal, passion, enthusiasm।
 
 ### 11. Placate
 *verb* — **শান্ত করা, তুষ্ট করা** · IBA MBA ’11
@@ -116,7 +118,7 @@ To make someone less angry or hostile.
 
 > A parent may decide to placate a crying baby with a pacifier.
 
-**মনে রাখুন:** Placate-এর object সবসময় মানুষ (রাগী কাউকে ঠান্ডা করা)। Pacify, appease কাছাকাছি।
+**মনে রাখুন:** placebo (রোগীকে খুশি রাখার ভুয়া ওষুধ)-এর সাথে মিলিয়ে মনে রাখুন। Placate-এর object সবসময় মানুষ (রাগী কাউকে ঠান্ডা করা)। Pacify, appease কাছাকাছি।
 
 ### 12. Zeal
 *noun* — **প্রবল আগ্রহ, উদ্দীপনা** · IBA MBA ’14
@@ -125,7 +127,7 @@ Strong enthusiasm and determination to do something.
 
 > The great emperor’s crusading zeal led him to conquer many lands.
 
-**মনে রাখুন:** zealous (adj.) = উদ্যমী; zealot = গোঁড়া/অন্ধ সমর্থক।
+**মনে রাখুন:** zealous (adj.) = উদ্যমী; zealot = গোঁড়া/অন্ধ সমর্থক। কাছাকাছি: fervor, enthusiasm, passion।
 
 ### 13. Abstain
 *verb* — **বিরত থাকা** · IBA MBA ’05
@@ -260,7 +262,7 @@ Lasting for a very short time.
 
 > An ephemeral moment of victory may last mere seconds, but it can remain as a triumphant memory for decades.
 
-**মনে রাখুন:** Transient, fleeting, short-lived সমার্থক। বিপরীত: permanent, eternal।
+**মনে রাখুন:** এক দিনের মতো টেকে—ক্ষণিকের। Transient, fleeting, short-lived সমার্থক। বিপরীত: permanent, eternal।
 
 ### 28. Laconic
 *adj.* — **স্বল্পভাষী, সংক্ষিপ্ত** · IBA MBA ’22
@@ -305,7 +307,7 @@ A harsh, unpleasant mixture of sounds.
 
 > The cacophony of the middle school band warming up was nearly unbearable for the audience.
 
-**মনে রাখুন:** caco (খারাপ) + phony (শব্দ)। বিপরীত: euphony (শ্রুতিমধুর ধ্বনি)।
+**মনে রাখুন:** caco (খারাপ) + phony (শব্দ)। telephone, symphony-র phone/phony = শব্দ। বিপরীত: euphony (শ্রুতিমধুর ধ্বনি)।
 
 ### 33. Enervate
 *verb* — **দুর্বল করে ফেলা, শক্তি নিঃশেষ করা** · IBA BBA ’21
@@ -314,7 +316,7 @@ To cause someone to feel drained of energy; weaken.
 
 > The boxer used a swift left uppercut to the jaw to enervate his opponent.
 
-**মনে রাখুন:** ⚠ সবচেয়ে বড় ফাঁদ: Enervate শুনতে energize-এর মতো, কিন্তু অর্থ উল্টো—দুর্বল করা। Invigorate = চাঙ্গা করা।
+**মনে রাখুন:** e (বাইরে) + nerve (শক্তি) → nerve বের করে নেওয়া → দুর্বল করা। ⚠ শুনতে energize-এর মতো, কিন্তু অর্থ উল্টো। Invigorate = চাঙ্গা করা।
 
 ### 34. Ingenuous
 *adj.* — **সরল, সাদাসিধা, অকপট** · IBA MBA ’16
@@ -332,7 +334,7 @@ A moment of sudden and great revelation or realization.
 
 > Seeing her father again when she was an adult was an epiphany that changed her whole view of her childhood.
 
-**মনে রাখুন:** হঠাৎ ‘ইউরেকা!’ মুহূর্ত।
+**মনে রাখুন:** হঠাৎ মাথায় বাতি জ্বলে ওঠা—‘ইউরেকা!’ মুহূর্ত। কাছাকাছি: realization, revelation, insight।
 
 ### 36. Paradox
 *noun* — **স্ববিরোধিতা, আপাতবিরোধী উক্তি** · IBA MBA ’24
@@ -368,7 +370,7 @@ To express contempt for; ridicule.
 
 > The unreasonable supervisor was known to deride his employees on a daily basis.
 
-**মনে রাখুন:** noun: derision; adj. derisive। Mock, ridicule সমার্থক; বিপরীত praise, venerate।
+**মনে রাখুন:** ridiculous (হাস্যকর)-এর rid লুকিয়ে আছে → কাউকে নিয়ে হাসাহাসি করা। noun: derision। Mock, ridicule সমার্থক; বিপরীত praise, venerate।
 
 ### 40. Eulogy
 *noun* — **স্তুতিবাক্য, প্রশংসা-বক্তৃতা** · IBA MBA ’05
@@ -413,7 +415,7 @@ To go back and forth between choices or opinions; be indecisive.
 
 > Some citizens vote solely along party lines and never waver in their political decisions.
 
-**মনে রাখুন:** Waver (দ্বিধা করা) ≠ Waiver (মওকুফ, ছাড়পত্র)—বানান ও অর্থ দুটোই আলাদা।
+**মনে রাখুন:** wave (ঢেউ)-এর মতো এদিক-ওদিক দোলা → দ্বিধা করা। ⚠ Waver (দ্বিধা করা) ≠ Waiver (মওকুফ, ছাড়পত্র)—বানান ও অর্থ দুটোই আলাদা।
 
 ### 45. Bolster
 *verb* — **শক্তিশালী করা, জোরদার করা** · IBA MBA ’05
@@ -449,7 +451,7 @@ Easily bent or shaped; easily influenced; malleable.
 
 > Children’s moods are often pliable since children are greatly affected by their surroundings.
 
-**মনে রাখুন:** ply = ভাঁজ করা। আক্ষরিক অর্থে সহজে বাঁকে (pliable wire), রূপক অর্থে সহজে প্রভাবিত হয়। Malleable, flexible সমার্থক।
+**মনে রাখুন:** ply = ভাঁজ করা (plywood, pliers)। আক্ষরিক অর্থে সহজে বাঁকে (pliable wire), রূপক অর্থে সহজে প্রভাবিত হয়। Malleable, flexible সমার্থক।
 
 ### 49. Ostentation
 *noun* — **জাঁকজমক, লোকদেখানো আড়ম্বর**
@@ -458,7 +460,7 @@ A pretentious or showy display, especially of wealth.
 
 > Owning a mansion doesn’t imply ostentation, but traveling exclusively by private jet certainly can.
 
-**মনে রাখুন:** adj. ostentatious = লোকদেখানো। ‘Flaunt’ (verb) কাছাকাছি।
+**মনে রাখুন:** সোজা কথায় show-off। adj. ostentatious = লোকদেখানো। ‘Flaunt’ (verb) কাছাকাছি।
 
 ### 50. Prevaricate
 *verb* — **সত্য এড়িয়ে যাওয়া, কথা ঘোরানো**
