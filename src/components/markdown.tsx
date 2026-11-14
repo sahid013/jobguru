@@ -2,7 +2,7 @@ import { Children, isValidElement, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { BackToList } from "./back-to-list";
-import { PracticeList, type PracticeItem } from "./practice-list";
+import { NoteLang, PracticeList, type PracticeItem } from "./practice-list";
 
 function textOf(node: ReactNode): string {
   if (typeof node === "string" || typeof node === "number") return String(node);
@@ -24,12 +24,45 @@ const components: Components = {
   h3: ({ children }) => <h3 id={slugify(textOf(children))}>{children}</h3>,
 };
 
-function Md({ children }: { children: string }) {
+function Md({ children, using = components }: { children: string; using?: Components }) {
   return (
-    <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+    <ReactMarkdown remarkPlugins={[remarkGfm]} components={using}>
       {children}
     </ReactMarkdown>
   );
+}
+
+/** Both copies are rendered; CSS shows the one matching the note's language toggle. */
+function Swap({ en, bn }: { en: ReactNode; bn: ReactNode }) {
+  return (
+    <>
+      <span className="show-en">{en}</span>
+      <span className="show-bn">{bn}</span>
+    </>
+  );
+}
+
+/**
+ * In Bangla mode an entry reads Bangla → English: "### 1. Anomaly" shows the Bangla meaning,
+ * and the "**বাংলা**" meaning line shows "Anomaly". Ids stay English so anchors keep working.
+ */
+function entryComponents(items: PracticeItem[]): Components {
+  const byN = new Map(items.map((it) => [it.n, it]));
+  const byBn = new Map(items.filter((it) => it.bn).map((it) => [it.bn!, it.word]));
+  return {
+    ...components,
+    h3: ({ children }) => {
+      const text = textOf(children);
+      const item = byN.get(text.match(/^(\d+)\. /)?.[1] ?? "");
+      return (
+        <h3 id={slugify(text)}>{item?.bn ? <Swap en={children} bn={`${item.n}. ${item.bn}`} /> : children}</h3>
+      );
+    },
+    strong: ({ children }) => {
+      const word = byBn.get(textOf(children));
+      return <strong>{word ? <Swap en={children} bn={word} /> : children}</strong>;
+    },
+  };
 }
 
 /**
@@ -71,13 +104,13 @@ export function Markdown({ children }: { children: string }) {
     );
   }
   return (
-    <div className="prose-note">
+    <NoteLang>
       <Md>{practice.before}</Md>
       <PracticeList items={practice.items}>
         <Md>{practice.intro}</Md>
       </PracticeList>
-      <Md>{practice.after}</Md>
+      <Md using={entryComponents(practice.items)}>{practice.after}</Md>
       <BackToList targetId={practice.targetId} label="শব্দতালিকায় ফিরুন" />
-    </div>
+    </NoteLang>
   );
 }

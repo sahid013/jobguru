@@ -147,3 +147,9 @@ html:has(.prose-note) {
     right: 1.5rem;
   }
 }
+
+/* Note language toggle: show only the copy that matches the chosen language. */
+.prose-note[data-lang="bn"] .show-en,
+.prose-note:not([data-lang="bn"]) .show-bn {
+  display: none;
+}
