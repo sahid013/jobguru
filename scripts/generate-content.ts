@@ -6,6 +6,7 @@
 
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { slugify } from "../src/components/markdown";
 import { NOTE_TITLE, QUESTION_SOURCE_SUFFIX, TOPIC, words, type VocabWord } from "./content/iba-50-words";
 
 const q = (v: string) => `'${v.replace(/'/g, "''")}'`;
@@ -21,10 +22,16 @@ function rng(seed: number) {
 
 // ───────────────────────── Note (Markdown) ─────────────────────────
 
+const LIST_HEADING = "Practice: all 50 words";
+const heading = (w: VocabWord, i: number) => `${i + 1}. ${w.word}`;
+
+// Self-test list: see the word, recall the meaning, tap to check.
+const wordList = words.map((w, i) => `**${i + 1}.** [${w.word}](#${slugify(heading(w, i))})`).join(" · ");
+
 function wordEntry(w: VocabWord, i: number) {
   const src = w.source === "—" ? "" : ` · IBA ${w.source}`;
   const lines = [
-    `### ${i + 1}. ${w.word}`,
+    `### ${heading(w, i)}`,
     `*${w.pos}* — **${w.bn}**${src}`,
     "",
     capitalize(w.en) + ".",
@@ -32,6 +39,7 @@ function wordEntry(w: VocabWord, i: number) {
     `> ${w.example}`,
   ];
   if (w.tip) lines.push("", `**মনে রাখুন:** ${w.tip}`);
+  lines.push("", `[↑ শব্দতালিকায় ফিরুন](#${slugify(LIST_HEADING)})`);
   return lines.join("\n");
 }
 
@@ -41,6 +49,12 @@ const noteBody = [
   `Each entry gives the part of speech, the Bangla meaning, a plain-English definition, an example sentence, and the IBA exam(s) where the word appeared.`,
   ``,
   `প্রতিটি শব্দের নিচে **মনে রাখুন** অংশে বাংলায় মনে রাখার কৌশল, বানানের ফাঁদ ও কাছাকাছি শব্দের পার্থক্য দেওয়া আছে।`,
+  ``,
+  `## ${LIST_HEADING}`,
+  ``,
+  `পড়া শেষ হলে এখানে ফিরে আসুন: প্রতিটি শব্দ দেখে অর্থ মনে করার চেষ্টা করুন, তারপর শব্দে ক্লিক করে মিলিয়ে নিন।`,
+  ``,
+  wordList,
   ``,
   `---`,
   ``,
