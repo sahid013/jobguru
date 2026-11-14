@@ -83,7 +83,14 @@ body {
 .prose-note ul { list-style: disc; padding-left: 1.4em; margin: 0.8em 0; }
 .prose-note ol { list-style: decimal; padding-left: 1.4em; margin: 0.8em 0; }
 .prose-note li { margin: 0.3em 0; }
-.prose-note a { color: var(--brand); text-decoration: underline; }
+.prose-note a {
+  color: var(--brand);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+.prose-note a:hover { background-color: var(--brand-soft); }
+.prose-note a:active { opacity: 0.7; }
 .prose-note strong { font-weight: 700; }
 .prose-note blockquote {
   border-left: 3px solid var(--brand);

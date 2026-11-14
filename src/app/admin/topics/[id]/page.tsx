@@ -72,7 +72,7 @@ export default async function AdminTopicPage({ params }: PageProps<"/admin/topic
           <ul className="divide-y divide-line rounded-xl border border-line bg-surface">
             {(notes as Note[]).map((note) => (
               <li key={note.id} className="flex items-center justify-between gap-3 px-4 py-3">
-                <Link href={`/admin/notes/${note.id}`} className="hover:text-brand hover:underline" lang={lang}>
+                <Link href={`/admin/notes/${note.id}`} className="hover:text-brand" lang={lang}>
                   {note.title}
                 </Link>
                 <div className="flex items-center gap-2 shrink-0">

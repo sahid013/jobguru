@@ -58,7 +58,7 @@ export default async function AdminPage() {
               <h2 className="text-lg font-semibold">{subject.title}</h2>
               <Link
                 href={`/subjects/${subject.slug}`}
-                className="inline-flex items-center gap-1 text-sm text-brand hover:underline"
+                className="inline-flex items-center gap-1 text-sm text-brand transition-opacity hover:opacity-80"
                 lang="bn"
               >
                 সাইটে দেখুন
