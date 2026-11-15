@@ -13,15 +13,17 @@ import type { Note, Question, Subject, Topic, TopicNode } from "./types";
 
 export const CONTENT_TAG = "content";
 
-const SUBJECT_COLS = "id, slug, lang, title, marks, sort_order, sources, source_note";
+const SUBJECT_COLS = "id, slug, exam, lang, title, marks, sort_order, sources, source_note";
 const TOPIC_COLS = "id, subject_id, parent_id, slug, title, description, points, marks, sort_order";
 
-export const getSubjects = cache(async (): Promise<Subject[]> => {
+/** Subjects of one exam ("bcs", "gas-field", …), in syllabus order. */
+export const getSubjects = cache(async (exam: string): Promise<Subject[]> => {
   await connection();
-  if (!isSupabaseConfigured) return local.subjects;
+  if (!isSupabaseConfigured) return local.subjects.filter((s) => s.exam === exam);
   const { data, error } = await createPublicClient()
     .from("subjects")
     .select(SUBJECT_COLS)
+    .eq("exam", exam)
     .order("sort_order");
   if (error) throw error;
   return data as Subject[];
@@ -176,6 +178,7 @@ const local = (() => {
     subjects.push({
       id: s.slug,
       slug: s.slug,
+      exam: "bcs",
       lang: s.lang,
       title: s.title,
       marks: s.marks,

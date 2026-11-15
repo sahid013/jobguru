@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import { EmptyState } from "@/components/empty-state";
 import { PressLink } from "@/components/motion";
 import { TopicList } from "@/components/topic-list";
+import { examCrumb } from "@/lib/exams";
 import { Breadcrumbs, Callout, PageSkeleton } from "@/components/ui";
 import { buildTree, flattenTree, getSubject, getTopics, getTopicStats, sumStats } from "@/lib/data";
 import { countLabel, num, t } from "@/lib/i18n";
@@ -35,20 +36,27 @@ async function SubjectContent({ params }: Pick<PageProps<"/subjects/[subject]">,
 
   return (
     <div lang={lang}>
-      <Breadcrumbs items={[{ href: "/", label: "সব বিষয়", lang: "bn" }, { label: subject.title }]} />
+      <Breadcrumbs items={[examCrumb(subject.exam), { label: subject.title }]} />
 
-      <div className="rounded-xl border border-line bg-surface overflow-hidden">
-        <div className="flex items-center justify-between gap-4 px-5 py-4 bg-brand text-brand-ink">
-          <h1 className="text-2xl font-bold">{subject.title}</h1>
-          <span className="shrink-0 rounded-full bg-brand-ink text-brand px-3 py-0.5 font-semibold tabular-nums">
-            {num(lang, subject.marks)} {t(lang, "marks")}
-          </span>
+      <div className="rounded-[22px] border border-line bg-surface overflow-hidden shadow-[0_1px_2px_#034e3a0a]">
+        <div className="panel-deep px-6 py-8 sm:px-8">
+          <div className="relative flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-mint">{t(lang, "overview")}</p>
+              <h1 className="font-display mt-1 text-3xl sm:text-4xl">{subject.title}</h1>
+            </div>
+            {subject.marks > 0 && (
+              <span className="shrink-0 rounded-full border border-[#f2c94c]/30 bg-[#f2c94c]/15 px-4 py-1 font-semibold text-[#f2c94c] tabular-nums">
+                {num(lang, subject.marks)} {t(lang, "marks")}
+              </span>
+            )}
+          </div>
         </div>
 
         {tree.length > 0 ? (
           <>
             {/* What's inside, and the one button to press first */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-surface-2/60 px-5 py-3">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-gold-soft/50 px-5 py-3.5">
               <p className="text-sm text-muted">
                 {countLabel(lang, "topics", topics.length)} ·{" "}
                 {totals.notes + totals.questions > 0
@@ -58,7 +66,7 @@ async function SubjectContent({ params }: Pick<PageProps<"/subjects/[subject]">,
               {first && (
                 <PressLink
                   href={`/subjects/${subject.slug}/${first.slug}`}
-                  className="group inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-brand-ink transition-opacity hover:opacity-90"
+                  className="group inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-brand-ink shadow-[0_8px_20px_#034e3a2e] transition-colors hover:bg-brand-2"
                 >
                   {t(lang, "start")}
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
@@ -73,7 +81,7 @@ async function SubjectContent({ params }: Pick<PageProps<"/subjects/[subject]">,
               title={t(lang, "noTopics")}
               body={t(lang, "noTopicsHint")}
               action={
-                <Link href="/#syllabus" className="rounded-lg bg-brand px-4 py-2 font-semibold text-brand-ink hover:opacity-90">
+                <Link href={examCrumb(subject.exam).href} className="rounded-full bg-brand px-4 py-2 font-semibold text-brand-ink transition-colors hover:bg-brand-2">
                   {t(lang, "allSubjects")}
                 </Link>
               }
@@ -83,7 +91,7 @@ async function SubjectContent({ params }: Pick<PageProps<"/subjects/[subject]">,
 
         {subject.sources.length > 0 && (
           <section className="border-t border-line bg-surface-2 px-5 py-5">
-            <h2 className="text-lg font-semibold text-brand">{t(lang, "sources")}</h2>
+            <h2 className="font-display text-xl text-heading">{t(lang, "sources")}</h2>
             {subject.sources.map((group, i) => (
               <div key={i} className="mt-3">
                 {group.heading && <h3 className="font-semibold">{group.heading}</h3>}

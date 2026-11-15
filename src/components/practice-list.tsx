@@ -55,7 +55,7 @@ export function PracticeList({ items, children }: { items: PracticeItem[]; child
         {items.map((item, i) => (
           <span key={item.anchor}>
             {i > 0 && " · "}
-            <strong>{item.n}.</strong> <a href={`#${item.anchor}`}>{lang === "bn" ? (item.bn ?? item.word) : item.word}</a>
+            <a href={`#${item.anchor}`}>{lang === "bn" ? (item.bn ?? item.word) : item.word}</a>
           </span>
         ))}
       </p>

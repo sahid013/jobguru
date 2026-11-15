@@ -86,7 +86,7 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="rounded-xl border border-line bg-surface p-8 text-center"
+          className="rounded-[22px] border border-line bg-surface p-8 text-center shadow-[0_12px_32px_#034e3a0d]"
         >
           <p className="text-muted">{t(lang, "score")}</p>
           <p className="mt-2 text-5xl font-bold text-brand tabular-nums">
@@ -94,7 +94,7 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
           </p>
           <div className="mx-auto mt-4 h-2 max-w-xs overflow-hidden rounded-full bg-surface-2">
             <motion.div
-              className="h-full rounded-full bg-brand"
+              className="h-full rounded-full bg-gradient-to-r from-brand-2 to-brand"
               initial={{ width: 0 }}
               animate={{ width: `${pct}%` }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
@@ -111,7 +111,7 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
             {wrong.length > 0 && (
               <PressButton
                 onClick={() => start(wrong.map((w) => w.question))}
-                className="inline-flex items-center gap-2 rounded-lg bg-brand px-5 py-2.5 font-semibold text-brand-ink transition-opacity hover:opacity-90"
+                className="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 font-semibold text-brand-ink shadow-[0_8px_20px_#034e3a2e] transition-colors hover:bg-brand-2"
               >
                 <Repeat className="size-4" aria-hidden />
                 {t(lang, "retryWrong")} ({num(lang, wrong.length)})
@@ -120,7 +120,7 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
             <PressButton
               onClick={() => start(questions)}
               className={`inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-semibold transition-colors ${
-                wrong.length > 0 ? "border border-line hover:bg-surface-2" : "bg-brand text-brand-ink hover:opacity-90"
+                wrong.length > 0 ? "border border-line hover:bg-surface-2" : "bg-brand text-brand-ink transition-colors hover:bg-brand-2"
               }`}
             >
               <RotateCcw className="size-4" aria-hidden />
@@ -166,7 +166,7 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
   }
 
   return (
-    <div className="rounded-xl border border-line bg-surface p-5 sm:p-7">
+    <div className="rounded-[22px] border border-line bg-surface p-5 shadow-[0_1px_2px_#034e3a0a,0_12px_32px_#034e3a0d] sm:p-8">
       <div className="flex items-center justify-between text-sm text-muted">
         <span className="tabular-nums">
           {t(lang, "question")} {num(lang, index + 1)} / {num(lang, order.length)}
@@ -175,7 +175,7 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
       </div>
       <div className="mt-3 h-1.5 rounded-full bg-surface-2 overflow-hidden">
         <motion.div
-          className="h-full rounded-full bg-brand"
+          className="h-full rounded-full bg-gradient-to-r from-brand-2 to-brand"
           initial={false}
           animate={{ width: `${((index + (answered ? 1 : 0)) / order.length) * 100}%` }}
         />
@@ -218,7 +218,7 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
                     whileTap={answered ? undefined : { scale: 0.985 }}
                     animate={feedback}
                     transition={{ duration: 0.38 }}
-                    className={`w-full flex items-start gap-3 rounded-lg border-2 px-4 py-3 text-left transition-colors ${state}`}
+                    className={`w-full flex items-start gap-3 rounded-xl border-2 px-4 py-3 text-left transition-colors ${state}`}
                   >
                     <span className="grid place-items-center shrink-0 size-7 rounded-full bg-surface-2 text-sm font-semibold">
                       {OPTION_LABELS[lang][i]}
@@ -281,7 +281,7 @@ export function Quiz({ questions, lang }: { questions: Question[]; lang: Lang })
             <PressButton
               onClick={next}
               autoFocus
-              className="group inline-flex items-center gap-2 rounded-lg bg-brand text-brand-ink px-5 py-2.5 font-semibold transition-opacity hover:opacity-90"
+              className="group inline-flex items-center gap-2 rounded-full bg-brand text-brand-ink px-5 py-2.5 font-semibold shadow-[0_8px_20px_#034e3a2e] transition-colors hover:bg-brand-2"
             >
               {isLast ? t(lang, "finish") : t(lang, "next")}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />

@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { SubjectSidebar } from "@/components/subject-sidebar";
 import { buildTree, getSubject, getTopics, getTopicStats } from "@/lib/data";
+import { examCrumb } from "@/lib/exams";
 import { t } from "@/lib/i18n";
 
 // Two columns: the topic tree on the left, the selected page (overview, topic, practice) on the right.
@@ -25,6 +26,7 @@ async function Sidebar({ params }: Pick<LayoutProps<"/subjects/[subject]">, "par
     <SubjectSidebar
       subjectSlug={subject.slug}
       subjectTitle={subject.title}
+      examHref={examCrumb(subject.exam).href}
       lang={subject.lang}
       tree={buildTree(topics)}
       stats={stats}

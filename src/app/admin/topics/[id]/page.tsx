@@ -60,7 +60,7 @@ export default async function AdminTopicPage({ params }: PageProps<"/admin/topic
           <h2 className="text-lg font-semibold">নোট</h2>
           <Link
             href={`/admin/notes/new?topic=${topic.id}`}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-brand text-brand-ink px-4 py-2 font-semibold transition-opacity hover:opacity-90"
+            className="inline-flex items-center gap-1.5 rounded-full bg-brand text-brand-ink px-4 py-2 font-semibold shadow-[0_8px_20px_#034e3a2e] transition-colors hover:bg-brand-2"
           >
             <Plus className="size-4" aria-hidden />
             নতুন নোট

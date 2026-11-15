@@ -22,7 +22,7 @@ export function TopicList({
   depth?: number;
 }) {
   return (
-    <ul className={depth === 0 ? "divide-y divide-line" : "mt-3 space-y-3 border-l-2 border-line pl-4"}>
+    <ul className={depth === 0 ? "divide-y divide-line" : "mt-3 space-y-3 border-l-2 border-mint/50 pl-4"}>
       {nodes.map((node) => {
         const totals = sumStats(descendantIds(topics, node.id), stats);
         return (
@@ -30,8 +30,8 @@ export function TopicList({
             <div className="flex items-start justify-between gap-4">
               <Link
                 href={`/subjects/${subjectSlug}/${node.slug}`}
-                className={`group inline-flex items-center gap-1.5 hover:text-brand ${
-                  depth === 0 ? "text-xl font-semibold" : "font-semibold"
+                className={`group inline-flex items-center gap-1.5 hover:text-brand-2 ${
+                  depth === 0 ? "font-display text-xl text-heading" : "font-semibold"
                 }`}
               >
                 {node.title}

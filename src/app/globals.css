@@ -1,15 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f7f6f2;
+  /* Cream paper, deep green ink, a touch of gold — calm enough for long reading sessions. */
+  --bg: #faf7f0;
   --surface: #ffffff;
-  --surface-2: #f0efe9;
-  --ink: #1b1f1d;
-  --muted: #5e6662;
-  --line: #e2e0d8;
-  --brand: #0f6b4f;
+  --surface-2: #f2ede1;
+  --ink: #1c2b26;
+  --heading: #063d2f;
+  --muted: #4a5b54;
+  --line: #e4e0d3;
+  --brand: #034e3a;
+  --brand-2: #178e66;
   --brand-ink: #ffffff;
-  --brand-soft: #e3f1ea;
+  --brand-soft: #e3f3ea;
+  --deep: #063d2f;
+  --deep-2: #0b4d3a;
+  --mint: #7fd1b0;
+  --gold: #c9a24b;
+  --gold-soft: #f6efd9;
   --accent: #c2410c;
   --warn-bg: #fdf6e3;
   --warn-ink: #7a5a0c;
@@ -19,15 +27,22 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #111513;
-    --surface: #181d1b;
-    --surface-2: #1f2522;
-    --ink: #e8ece9;
-    --muted: #9aa5a0;
-    --line: #2b3330;
+    --bg: #0d1412;
+    --surface: #141c19;
+    --surface-2: #1b2522;
+    --ink: #e6eeea;
+    --heading: #d8f0e4;
+    --muted: #9fb0a8;
+    --line: #26332e;
     --brand: #3fb68b;
-    --brand-ink: #0b1310;
-    --brand-soft: #173329;
+    --brand-2: #5fcf9f;
+    --brand-ink: #062a1f;
+    --brand-soft: #15302a;
+    --deep: #072b21;
+    --deep-2: #0b3a2c;
+    --mint: #7fd1b0;
+    --gold: #d9b45e;
+    --gold-soft: #2a2414;
     --accent: #fb923c;
     --warn-bg: #2a2412;
     --warn-ink: #e9cf85;
@@ -41,11 +56,18 @@
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
   --color-ink: var(--ink);
+  --color-heading: var(--heading);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
   --color-brand-ink: var(--brand-ink);
   --color-brand-soft: var(--brand-soft);
+  --color-deep: var(--deep);
+  --color-deep-2: var(--deep-2);
+  --color-mint: var(--mint);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
   --color-accent: var(--accent);
   --color-warn-bg: var(--warn-bg);
   --color-warn-ink: var(--warn-ink);
@@ -53,11 +75,15 @@
   --color-bad: var(--bad);
   /* Inter has no Bengali glyphs, so Bangla text falls through to Hind Siliguri. */
   --font-sans: var(--font-inter), var(--font-bangla), system-ui, sans-serif;
+  /* Headings get a serif Bangla face for a bookish, less "app-like" feel. */
+  --font-display: var(--font-serif-bn), Georgia, serif;
 }
 
 body {
   background: var(--bg);
   color: var(--ink);
+  /* Full-bleed bands use 100vw; never let that open a sideways scrollbar. */
+  overflow-x: clip;
 }
 
 /* Bangla script needs a little more line height to keep matras and kars from clashing. */
@@ -65,60 +91,218 @@ body {
   line-height: 1.75;
 }
 
-/* Rendered Markdown notes */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+/* ───────────── Decorative layers (glows) ───────────── */
+
+/* Eight-point star lattice, faded out toward the edges with a mask. */
+.glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+}
+.glow-green { background: radial-gradient(circle, #178e6629, transparent 70%); }
+.glow-gold { background: radial-gradient(circle, #c9a24b26, transparent 65%); }
+
+/* A full-width band inside the centred <main>. */
+.full-bleed {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* Dark green panel used for hero banners and calls to action. */
+.panel-deep {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(520px 320px at 8% 0%, #178e6659, transparent 70%),
+    radial-gradient(480px 320px at 100% 100%, #c9a24b2e, transparent 70%),
+    linear-gradient(135deg, #034e3a, #063d2f);
+}
+
+/* Small pill above a heading, with a pulsing dot. */
+.pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--brand-2);
+  box-shadow: 0 0 0 4px #178e662e;
+}
+
+/* Cards that rise a little and show a mint→gold top bar on hover. */
+.lift {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s, border-color 0.3s;
+}
+.lift::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  border-radius: inherit;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background: linear-gradient(90deg, var(--mint), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px #034e3a1f;
+}
+.lift:hover::before { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .lift:hover { transform: none; }
+}
+
+/* ───────────── Rendered Markdown notes (headings, tables, callouts) ───────────── */
+
 .prose-note {
   font-size: 1.0625rem;
-  line-height: 1.8;
+  line-height: 1.85;
 }
 .prose-note h1, .prose-note h2, .prose-note h3 {
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-weight: 600;
   line-height: 1.35;
-  margin: 1.6em 0 0.6em;
+  color: var(--heading);
+  margin: 1.8em 0 0.7em;
 }
 .prose-note :is(h2, h3) { scroll-margin-top: 5rem; }
-.prose-note h1 { font-size: 1.5rem; }
-.prose-note h2 { font-size: 1.3rem; }
-.prose-note h3 { font-size: 1.125rem; }
+.prose-note h1 { font-size: 1.6rem; }
+.prose-note h2 {
+  font-size: 1.4rem;
+  padding-bottom: 0.4em;
+  background: linear-gradient(90deg, var(--brand-2), var(--gold)) no-repeat left bottom / 3.5rem 3px;
+}
+/* Each entry/section opens with a soft mint banner. */
+.prose-note h3 {
+  position: relative;
+  overflow: hidden;
+  font-size: 1.2rem;
+  padding: 0.55em 1em;
+  border-radius: 14px;
+  border: 1px solid #178e6626;
+  background: linear-gradient(135deg, #eef8f2, #d6efe2);
+}
+.prose-note > :first-child { margin-top: 0; }
 .prose-note p { margin: 0.8em 0; }
 .prose-note ul { list-style: disc; padding-left: 1.4em; margin: 0.8em 0; }
-.prose-note ol { list-style: decimal; padding-left: 1.4em; margin: 0.8em 0; }
-.prose-note li { margin: 0.3em 0; }
+.prose-note ol { list-style: decimal; padding-left: 1.6em; margin: 0.8em 0; }
+.prose-note li { margin: 0.35em 0; padding-left: 0.2em; }
+.prose-note li::marker { color: var(--brand-2); font-weight: 700; }
 .prose-note a {
   color: var(--brand);
+  font-weight: 600;
   text-decoration: none;
   border-radius: 4px;
   transition: background-color 0.15s, opacity 0.15s;
 }
 .prose-note a:hover { background-color: var(--brand-soft); }
 .prose-note a:active { opacity: 0.7; }
-.prose-note strong { font-weight: 700; }
+.prose-note strong { font-weight: 700; color: var(--heading); }
+.prose-note em { color: var(--muted); }
 .prose-note blockquote {
-  border-left: 3px solid var(--brand);
-  background: var(--brand-soft);
-  padding: 0.6em 1em;
-  margin: 1em 0;
-  border-radius: 0 6px 6px 0;
+  position: relative;
+  border-left: 4px solid var(--gold);
+  background: linear-gradient(120deg, #178e660f, #c9a24b24);
+  padding: 0.75em 1.1em;
+  margin: 1.2em 0;
+  border-radius: 0 14px 14px 0;
 }
+.prose-note blockquote > :first-child { margin-top: 0; }
+.prose-note blockquote > :last-child { margin-bottom: 0; }
 .prose-note code {
   background: var(--surface-2);
   padding: 0.1em 0.35em;
   border-radius: 4px;
   font-size: 0.9em;
 }
+.prose-note pre {
+  margin: 1.1em 0;
+  padding: 1em 1.2em;
+  overflow-x: auto;
+  border-radius: 14px;
+  background: #0f2620;
+  color: #e3f3ea;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.86rem;
+  line-height: 1.65;
+  tab-size: 2;
+}
+.prose-note pre code { background: none; padding: 0; font-size: inherit; color: inherit; }
+
+/* Hand-drawn SVG figures inside notes. */
+.diagram {
+  margin: 1.4em 0;
+  padding: 1.1rem 0.75rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  overflow-x: auto;
+}
+.diagram svg { display: block; width: 100%; height: auto; margin: 0 auto; font-family: inherit; }
+.diagram figcaption { margin-top: 0.75em; text-align: center; font-size: 0.9em; color: var(--muted); }
+
+/* An ornament instead of a plain rule. */
+.prose-note hr {
+  border: 0;
+  height: 1.5rem;
+  margin: 2em 0;
+  background:
+    linear-gradient(var(--line), var(--line)) left center / calc(50% - 1.5rem) 1px no-repeat,
+    linear-gradient(var(--line), var(--line)) right center / calc(50% - 1.5rem) 1px no-repeat;
+  position: relative;
+}
+.prose-note hr::after {
+  content: "✦";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold);
+  font-size: 1rem;
+}
+.prose-note .table-wrap {
+  margin: 1.2em 0;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
 .prose-note table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1em 0;
   font-size: 0.95em;
-  display: block;
-  overflow-x: auto;
 }
 .prose-note th, .prose-note td {
-  border: 1px solid var(--line);
-  padding: 0.5em 0.75em;
+  border-bottom: 1px solid var(--line);
+  padding: 0.6em 0.9em;
   text-align: left;
 }
-.prose-note th { background: var(--surface-2); font-weight: 600; }
+.prose-note tr:last-child td { border-bottom: 0; }
+.prose-note th {
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.prose-note tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--surface-2) 55%, transparent); }
+.prose-note td strong { color: var(--brand); }
+
+@media (prefers-color-scheme: dark) {
+  .prose-note h3 {
+    border-color: #3fb68b33;
+    background: linear-gradient(135deg, #12302a, #0f2620);
+  }
+  .prose-note th { color: var(--brand-ink); }
+}
 
 /* Keyboard users always see where they are. */
 :focus-visible {
@@ -152,4 +336,19 @@ html:has(.prose-note) {
 .prose-note[data-lang="bn"] .show-en,
 .prose-note:not([data-lang="bn"]) .show-bn {
   display: none;
+}
+
+/* Gentle bob for the hero's floating chip. */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+@keyframes ping-soft {
+  0% { box-shadow: 0 0 0 0 #35c98d80; }
+  100% { box-shadow: 0 0 0 10px #35c98d00; }
+}
+.animate-ping-soft { animation: ping-soft 2.4s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-float, .animate-ping-soft { animation: none; }
 }

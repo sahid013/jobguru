@@ -25,7 +25,7 @@ export function BackToList({ targetId, label }: { targetId: string; label: strin
       lang="bn"
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
-      className={`back-to-list rounded-md border border-line bg-surface px-3 py-1.5 text-sm shadow-sm transition-opacity ${
+      className={`back-to-list rounded-full border border-line bg-surface px-4 py-2 text-sm font-semibold text-brand shadow-[0_8px_20px_#034e3a24] transition-opacity ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >

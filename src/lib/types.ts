@@ -5,6 +5,7 @@ export type SourceGroup = { heading: string | null; items: string[] };
 export type Subject = {
   id: string;
   slug: string;
+  exam: string;
   lang: Lang;
   title: string;
   marks: number;

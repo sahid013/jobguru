@@ -84,7 +84,7 @@ export function AuthMenu() {
         <Link
           href="/admin"
           aria-label="কন্টেন্ট যোগ"
-          className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-brand-soft text-brand font-medium transition-opacity hover:opacity-90"
+          className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-brand-soft text-brand font-medium shadow-[0_8px_20px_#034e3a2e] transition-colors hover:bg-brand-2"
         >
           <PenLine className="size-4" aria-hidden />
           <span className="hidden sm:inline">কন্টেন্ট যোগ</span>

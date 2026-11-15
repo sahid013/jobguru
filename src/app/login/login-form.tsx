@@ -63,7 +63,7 @@ export function LoginForm({ next }: { next: string }) {
       {message && <p className="text-sm text-ok">{message}</p>}
       <button
         disabled={pending}
-        className="w-full rounded-lg bg-brand text-brand-ink py-2.5 font-semibold hover:opacity-90 disabled:opacity-60"
+        className="w-full rounded-full bg-brand text-brand-ink py-2.5 font-semibold transition-colors hover:bg-brand-2 disabled:opacity-60"
       >
         {pending ? "অপেক্ষা করুন…" : mode === "signin" ? "লগইন" : "অ্যাকাউন্ট খুলুন"}
       </button>

@@ -13,13 +13,14 @@ import { Collapse, Rotate, spring } from "./motion";
 type Props = {
   subjectSlug: string;
   subjectTitle: string;
+  examHref: string;
   lang: Lang;
   tree: TopicNode[];
   stats: TopicStats;
   labels: { overview: string; contents: string; allSubjects: string };
 };
 
-export function SubjectSidebar({ subjectSlug, subjectTitle, lang, tree, stats, labels }: Props) {
+export function SubjectSidebar({ subjectSlug, subjectTitle, examHref, lang, tree, stats, labels }: Props) {
   const pathname = usePathname();
   const base = `/subjects/${subjectSlug}`;
   // /subjects/<subject>/<topic>[/practice] gives the active topic slug
@@ -61,7 +62,7 @@ export function SubjectSidebar({ subjectSlug, subjectTitle, lang, tree, stats, l
   return (
     <aside className="mb-6 lg:mb-0">
       {/* Phones and tablets: a bar that shows where you are and opens the list */}
-      <div className="lg:hidden rounded-xl border border-line bg-surface">
+      <div className="lg:hidden rounded-[18px] border border-line bg-surface shadow-[0_1px_2px_#034e3a0a]">
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-expanded={mobileOpen}
@@ -82,16 +83,16 @@ export function SubjectSidebar({ subjectSlug, subjectTitle, lang, tree, stats, l
       </div>
 
       {/* Desktop: sticky sidebar */}
-      <div className="hidden lg:block sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto rounded-xl border border-line bg-surface p-2">
+      <div className="hidden lg:block sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto rounded-[20px] border border-line bg-surface p-2.5 shadow-[0_1px_2px_#034e3a0a,0_12px_32px_#034e3a0d]">
         <Link
-          href="/#syllabus"
+          href={examHref}
           className="group inline-flex items-center gap-1 px-3 pt-1 text-xs text-muted hover:text-brand"
           lang={lang}
         >
           <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" aria-hidden />
           {labels.allSubjects}
         </Link>
-        <p className="px-3 pt-2 pb-2 text-sm font-bold leading-snug" lang={lang}>
+        <p className="font-display px-3 pt-2 pb-2 text-lg leading-snug text-heading" lang={lang}>
           {subjectTitle}
         </p>
         {nav("desktop")}

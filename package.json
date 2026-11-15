@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "db:seed-sql": "tsx scripts/generate-seed.ts",
-    "content:sql": "tsx scripts/generate-content.ts"
+    "content:sql": "tsx scripts/generate-content.ts",
+    "content:nobel": "tsx scripts/generate-nobel-2026.ts",
+    "content:gas-field": "tsx scripts/generate-gas-field.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

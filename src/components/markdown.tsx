@@ -2,6 +2,7 @@ import { Children, isValidElement, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { BackToList } from "./back-to-list";
+import { FIGURES } from "./figures";
 import { NoteLang, PracticeList, type PracticeItem } from "./practice-list";
 
 function textOf(node: ReactNode): string {
@@ -22,6 +23,21 @@ export function slugify(text: string) {
 const components: Components = {
   h2: ({ children }) => <h2 id={slugify(textOf(children))}>{children}</h2>,
   h3: ({ children }) => <h3 id={slugify(textOf(children))}>{children}</h3>,
+  // ```figure\nname\n``` embeds one of the hand-drawn diagrams; other code blocks stay code.
+  pre: ({ children }) => {
+    const code = Children.toArray(children)[0];
+    if (isValidElement<{ className?: string; children?: ReactNode }>(code) && code.props.className === "language-figure") {
+      const Fig = FIGURES[textOf(code.props.children).trim()];
+      if (Fig) return <Fig />;
+    }
+    return <pre>{children}</pre>;
+  },
+  // Wide tables scroll inside their own frame instead of the page.
+  table: ({ children }) => (
+    <div className="table-wrap">
+      <table>{children}</table>
+    </div>
+  ),
 };
 
 function Md({ children, using = components }: { children: string; using?: Components }) {

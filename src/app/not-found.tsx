@@ -9,7 +9,7 @@ export default function NotFound() {
         title="পেজটি পাওয়া যায়নি"
         body="লিংকটি ভুল হতে পারে, অথবা পেজটি সরিয়ে ফেলা হয়েছে।"
         action={
-          <PressLink href="/" className="rounded-lg bg-brand px-4 py-2 font-semibold text-brand-ink transition-opacity hover:opacity-90">
+          <PressLink href="/" className="rounded-full bg-brand px-4 py-2 font-semibold text-brand-ink shadow-[0_8px_20px_#034e3a2e] transition-colors hover:bg-brand-2">
             সব বিষয় দেখুন
           </PressLink>
         }

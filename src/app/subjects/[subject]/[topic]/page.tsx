@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronRight, ListChecks } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -7,6 +7,7 @@ import { ContentCounts } from "@/components/content-counts";
 import { EmptyState } from "@/components/empty-state";
 import { Markdown } from "@/components/markdown";
 import { PressLink } from "@/components/motion";
+import { examCrumb } from "@/lib/exams";
 import { Breadcrumbs, MarksBadge, PageSkeleton } from "@/components/ui";
 import {
   ancestors,
@@ -68,14 +69,19 @@ async function TopicContent({ params }: Pick<Props, "params">) {
   const isEmpty = notes.length === 0 && children.length === 0 && questionCount === 0;
 
   const practiceCard = questionCount > 0 && (
-    <section className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-brand/30 bg-brand-soft px-5 py-4">
-      <div>
-        <p className="font-semibold">{t(lang, "practiceHint")}</p>
-        <p className="text-sm text-muted">{countLabel(lang, "questions", questionCount)}</p>
+    <section className="panel-deep flex flex-wrap items-center justify-between gap-4 rounded-[22px] px-6 py-6 sm:px-8">
+      <div className="relative flex items-center gap-4">
+        <span className="grid size-12 shrink-0 place-items-center rounded-2xl border border-mint/25 bg-mint/10 text-mint">
+          <ListChecks className="size-6" aria-hidden />
+        </span>
+        <div>
+          <p className="font-display text-xl">{t(lang, "practiceHint")}</p>
+          <p className="text-[#d6e6df]">{countLabel(lang, "questions", questionCount)}</p>
+        </div>
       </div>
       <PressLink
         href={`${href(topic.slug)}/practice`}
-        className="group inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2.5 font-semibold text-brand-ink transition-opacity hover:opacity-90"
+        className="group relative inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-bold text-[#034e3a] transition-colors hover:bg-gold hover:text-white"
       >
         {t(lang, "practice")}
         <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
@@ -88,16 +94,17 @@ async function TopicContent({ params }: Pick<Props, "params">) {
       <div>
         <Breadcrumbs
           items={[
-            { href: "/", label: "সব বিষয়", lang: "bn" },
+            examCrumb(subject.exam),
             { href: `/subjects/${subject.slug}`, label: subject.title },
             ...ancestors(topics, topic).map((a) => ({ href: href(a.slug), label: a.title })),
             { label: topic.title },
           ]}
         />
-        <header className="flex items-start justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold leading-tight">{topic.title}</h1>
-            {topic.description && <p className="mt-2 text-lg text-muted">{topic.description}</p>}
+        <header className="relative flex items-start justify-between gap-4 overflow-hidden rounded-[22px] border border-brand-2/15 bg-gradient-to-br from-[#eef8f2] to-[#d6efe2] px-6 py-7 sm:px-8 dark:from-[#12302a] dark:to-[#0f2620]">
+          <div className="glow glow-gold -right-24 -top-24 size-80" aria-hidden />
+          <div className="relative">
+            <h1 className="font-display text-3xl leading-tight text-heading sm:text-4xl">{topic.title}</h1>
+            {topic.description && <p className="mt-3 max-w-2xl text-lg text-muted">{topic.description}</p>}
             {topic.points.length > 0 && (
               <ul className="mt-2 list-[circle] pl-6 text-muted space-y-1">
                 {topic.points.map((p) => (
@@ -106,7 +113,11 @@ async function TopicContent({ params }: Pick<Props, "params">) {
               </ul>
             )}
           </div>
-          {topic.marks != null && <MarksBadge lang={lang} marks={topic.marks} solid />}
+          {topic.marks != null && (
+            <span className="relative">
+              <MarksBadge lang={lang} marks={topic.marks} solid />
+            </span>
+          )}
         </header>
       </div>
 
@@ -115,7 +126,7 @@ async function TopicContent({ params }: Pick<Props, "params">) {
 
       {children.length > 0 && (
         <section>
-          <h2 className="text-lg font-semibold mb-3">{t(lang, "subtopics")}</h2>
+          <h2 className="font-display mb-4 text-xl text-heading">{t(lang, "subtopics")}</h2>
           <ul className="grid gap-3 sm:grid-cols-2">
             {children.map((c) => {
               const totals = sumStats(descendantIds(topics, c.id), stats);
@@ -123,10 +134,10 @@ async function TopicContent({ params }: Pick<Props, "params">) {
                 <li key={c.id}>
                   <Link
                     href={href(c.slug)}
-                    className="group flex h-full flex-col rounded-lg border border-line bg-surface px-4 py-3 hover:border-brand"
+                    className="lift group flex h-full flex-col overflow-hidden rounded-[18px] border border-line bg-surface px-5 py-4 hover:border-brand-2/40"
                   >
                     <span className="flex items-start justify-between gap-2">
-                      <span className="font-semibold group-hover:text-brand">{c.title}</span>
+                      <span className="font-display text-lg text-heading group-hover:text-brand-2">{c.title}</span>
                       <ChevronRight
                         className="mt-0.5 size-4 shrink-0 text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-brand"
                         aria-hidden
@@ -147,8 +158,11 @@ async function TopicContent({ params }: Pick<Props, "params">) {
       {notes.length > 0 && (
         <section className="space-y-6">
           {notes.map((note) => (
-            <div key={note.id} className="rounded-xl border border-line bg-surface px-5 sm:px-7 py-6">
-              <h2 className="text-xl font-bold">{note.title}</h2>
+            <div key={note.id} className="rounded-[22px] border border-line bg-surface px-5 py-7 shadow-[0_1px_2px_#034e3a0a,0_12px_32px_#034e3a0d] sm:px-9 sm:py-9">
+              <h2 className="font-display mb-6 flex items-center gap-3 text-2xl text-heading">
+                <span aria-hidden className="text-gold">✦</span>
+                {note.title}
+              </h2>
               <Markdown>{note.body}</Markdown>
             </div>
           ))}
@@ -166,7 +180,7 @@ async function TopicContent({ params }: Pick<Props, "params">) {
             next && (
               <PressLink
                 href={href(next.slug)}
-                className="group inline-flex items-center gap-2 rounded-lg bg-brand px-4 py-2 font-semibold text-brand-ink transition-opacity hover:opacity-90"
+                className="group inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 font-semibold text-brand-ink shadow-[0_8px_20px_#034e3a2e] transition-colors hover:bg-brand-2"
               >
                 {t(lang, "nextTopic")}: {next.title}
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
@@ -181,36 +195,36 @@ async function TopicContent({ params }: Pick<Props, "params">) {
         {prev ? (
           <PressLink
             href={href(prev.slug)}
-            className="group rounded-lg border border-line bg-surface px-4 py-3 transition-colors hover:border-brand"
+            className="lift group overflow-hidden rounded-[18px] border border-line bg-surface px-5 py-4 hover:border-brand-2/40"
           >
             <span className="inline-flex items-center gap-1 text-xs text-muted">
               <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" aria-hidden />
               {t(lang, "prevTopic")}
             </span>
-            <span className="mt-0.5 block font-semibold group-hover:text-brand">{prev.title}</span>
+            <span className="font-display mt-1 block text-lg text-heading group-hover:text-brand-2">{prev.title}</span>
           </PressLink>
         ) : (
           <PressLink
             href={`/subjects/${subject.slug}`}
-            className="group rounded-lg border border-line bg-surface px-4 py-3 transition-colors hover:border-brand"
+            className="lift group overflow-hidden rounded-[18px] border border-line bg-surface px-5 py-4 hover:border-brand-2/40"
           >
             <span className="inline-flex items-center gap-1 text-xs text-muted">
               <ArrowLeft className="size-3.5 transition-transform group-hover:-translate-x-0.5" aria-hidden />
               {t(lang, "backToOverview")}
             </span>
-            <span className="mt-0.5 block font-semibold group-hover:text-brand">{subject.title}</span>
+            <span className="font-display mt-1 block text-lg text-heading group-hover:text-brand-2">{subject.title}</span>
           </PressLink>
         )}
         {next && (
           <PressLink
             href={href(next.slug)}
-            className="group rounded-lg border border-line bg-surface px-4 py-3 text-right transition-colors hover:border-brand sm:col-start-2"
+            className="lift group overflow-hidden rounded-[18px] border border-line bg-surface px-5 py-4 text-right hover:border-brand-2/40 sm:col-start-2"
           >
             <span className="inline-flex items-center gap-1 text-xs text-muted">
               {t(lang, "nextTopic")}
               <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
             </span>
-            <span className="mt-0.5 block font-semibold group-hover:text-brand">{next.title}</span>
+            <span className="font-display mt-1 block text-lg text-heading group-hover:text-brand-2">{next.title}</span>
           </PressLink>
         )}
       </nav>

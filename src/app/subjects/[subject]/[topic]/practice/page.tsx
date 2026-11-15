@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Quiz } from "@/components/quiz";
+import { examCrumb } from "@/lib/exams";
 import { Breadcrumbs, PageSkeleton } from "@/components/ui";
 import { descendantIds, getQuestions, getSubject, getTopics } from "@/lib/data";
 import { t } from "@/lib/i18n";
@@ -39,7 +40,7 @@ async function PracticeContent({ params }: Pick<Props, "params">) {
     <div lang={lang} className="max-w-3xl mx-auto">
       <Breadcrumbs
         items={[
-          { href: "/", label: "সব বিষয়", lang: "bn" },
+          examCrumb(subject.exam),
           { href: `/subjects/${subject.slug}`, label: subject.title },
           { href: `/subjects/${subject.slug}/${topic.slug}`, label: topic.title },
           { label: t(lang, "practice") },
